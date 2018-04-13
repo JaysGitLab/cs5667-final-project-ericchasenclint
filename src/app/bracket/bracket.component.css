@@ -1,0 +1,12 @@
+.team-name{
+    min-width: 40px;
+    border-bottom: 1px solid black;
+}
+.parents{
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid black;
+}
+.selected{
+    color: red;
+}

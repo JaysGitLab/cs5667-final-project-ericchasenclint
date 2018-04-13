@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { BracketComponent } from './bracket/bracket.component';
+import { BoxselectComponent } from './boxselect/boxselect.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BracketComponent,
+    BoxselectComponent
   ],
   imports: [
     BrowserModule

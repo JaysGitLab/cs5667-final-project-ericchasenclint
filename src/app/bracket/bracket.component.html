@@ -1,0 +1,8 @@
+<div>
+    <div class="team-name" (click)="onSelect(bracket.name)"
+         [class.selected]="bracket.up && bracket.name == bracket.up.name">{{bracket.name}}</div>
+    <div class="parents" *ngIf="bracket.a">
+        <app-bracket [bracket]="bracket.a"></app-bracket>
+        <app-bracket [bracket]="bracket.b"></app-bracket>
+    </div>
+</div>
