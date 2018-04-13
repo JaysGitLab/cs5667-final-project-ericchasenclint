@@ -9,11 +9,6 @@ export class BracketComponent implements OnInit {
   @Input() bracket;
 
   constructor() { 
-      if (this.bracket == null){
-        console.log("bracket is null in constr")
-      }else{
-        console.log("bracket is not null in constr")
-      }
   }
 
   ngOnInit() {
@@ -21,6 +16,6 @@ export class BracketComponent implements OnInit {
   }
 
   onSelect(name: string){
-      this.bracket.up.name = name;
+      this.bracket.up.setName(name);
   }
 }

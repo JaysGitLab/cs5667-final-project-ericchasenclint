@@ -1,12 +1,25 @@
 .team-name{
-    min-width: 40px;
-    border-bottom: 1px solid black;
+    width: 40px;
+    position: relative`;
+    display: inline-block;
+    right: 0px;
+    vertical-align: top;
 }
 .parents{
     padding-left: 10px;
     margin-left: 10px;
+    position: relative;
+    right: 40px;
+    left: 0px;
+    display: inline-block;
+    margin-bottom: 5px;
     border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
 .selected{
+    background-color: #ccc;
+}
+.impossible{
     color: red;
 }
+

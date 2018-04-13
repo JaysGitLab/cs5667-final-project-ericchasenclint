@@ -15,6 +15,6 @@ export class BoxselectComponent implements OnInit {
   }
 
   onSelect(bracket: Bracket){
-      bracket.up.name = bracket.name;
+      bracket.up.setName(bracket.name);
   }
 }
