@@ -5,20 +5,20 @@ export class Bracket {
     up: Bracket;
     descendents: Bracket[];
 
-    constructor(up: Bracket, path: string, depth: number){
+    constructor(up: Bracket, teamNames: string[], level: number){
         this.up = up;
         if(this.up == null){
             this.descendents = [];
         }
-        if (depth > 3) {
-            this.name = path;
+        if (level >  8) {
+            this.name = teamNames.shift();
             this.addDescendent(this);
             return;
         } else {
             this.name = "???";
         }
-        this.a = new Bracket(this, path + "a", depth + 1);
-        this.b = new Bracket(this, path + "b", depth + 1);
+        this.a = new Bracket(this, teamNames, level * 2);
+        this.b = new Bracket(this, teamNames, level * 2);
     }
     addDescendent(descendent: Bracket){
         if(this.up != null){
