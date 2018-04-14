@@ -27,7 +27,7 @@ export class Bracket {
     validate(){
         if(this.a){
             this.impossible = this.name != this.a.name
-            && this.name != this.b.name)
+            && this.name != this.b.name;
         }
         if(this.up){
             this.up.validate();
