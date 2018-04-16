@@ -1,1 +1,1 @@
-ng serve --port 3000 --public-host http://cs5667.ml
+ng serve --port 3000 --host cs5667.ml
