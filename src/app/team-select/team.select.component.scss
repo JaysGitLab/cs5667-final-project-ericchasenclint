@@ -1,0 +1,31 @@
+/*styles for home content only*/
+.select-team-container {
+  margin: 75px 10% 75px 10%;
+}
+
+.team-row {
+  display: flex;
+  border: 2px solid #13293d;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  border-right: 2px solid #006494;
+  padding: 20px;
+}
+
+.team:last-of-type {
+  border-right: none;
+}
+
+.team-logo {
+  height: 100px;
+  width: 100px;
+}
+
+.team:hover {
+  background-color: aquamarine;
+}
