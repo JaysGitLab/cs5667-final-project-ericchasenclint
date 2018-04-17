@@ -3,7 +3,8 @@ export default class HelloReact extends React.Component {
     render() {
         return (
             <div>
-            hello from react
+		<button type="button" className="btn btn-primary">Click me!</button>			
+		hello from react
             </div>
         )
     }
