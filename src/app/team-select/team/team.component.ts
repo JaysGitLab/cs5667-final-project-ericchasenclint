@@ -9,6 +9,10 @@ import { bracket } from "./data/data";
 export class TeamComponent {
   bracket = bracket;
 
+  recordTeam = team => {
+    console.log(team);
+  };
+
   constructor() {}
   ngOnInit() {}
 }

@@ -1,17 +1,10 @@
-<!-- <h3>Michigan</h3>
-<img class="team-logo" src="../../assets/img/teams/michigan.png" /> -->
-
-<div class="select-team-container" *ngFor="let round of bracket">
-    <h1>{{ round[0] }}</h1>
-    <br />
+<div class="select-team-container" *ngFor="let seed of bracket">
+  <table class="team-table">
+    <tr class="team-row">
+      <td class="team" (click)="recordTeam(seed[0])">{{ seed[0] }}</td>
+      <td class="team" (click)="recordTeam(seed[1])">{{ seed[1] }}</td>
+      <td class="team" (click)="recordTeam(seed[2])">{{ seed[2] }}</td>
+      <td class="team" (click)="recordTeam(seed[3])">{{ seed[3] }}</td>
+    </tr>
+  </table>
 </div>
-
-
-
-<!--<h2 class="seed-title">First Seed</h2>
-    <div class="team-row">
-        <team class="team"></team>
-        <team class="team"></team>
-        <team class="team"></team>
-        <team class="team"></team>
-    </div> -->
