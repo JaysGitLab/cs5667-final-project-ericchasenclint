@@ -2,33 +2,32 @@
  * @author: @AngularClass
  */
 
-const helpers = require('./helpers');
-const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+const helpers = require("./helpers");
+const webpackMerge = require("webpack-merge"); // used to merge webpack configs
 // const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
-const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
+const commonConfig = require("./webpack.common.js"); // the settings that are common to prod and dev
 
 /**
  * Webpack Plugins
  */
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
+const DefinePlugin = require("webpack/lib/DefinePlugin");
+const NamedModulesPlugin = require("webpack/lib/NamedModulesPlugin");
+const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
 
 /**
  * Webpack Constants
  */
-const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
-const HOST = process.env.HOST || 'cs5667.ml';
-const PORT = process.env.PORT || 3002;
-const HMR = helpers.hasProcessFlag('hot');
-const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
+const ENV = (process.env.ENV = process.env.NODE_ENV = "development");
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 3007;
+const HMR = helpers.hasProcessFlag("hot");
+const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
   HMR: HMR
 });
-
 
 // const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 
@@ -37,16 +36,15 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
-  return webpackMerge(commonConfig({env: ENV}), {
-
+module.exports = function(options) {
+  return webpackMerge(commonConfig({ env: ENV }), {
     /**
      * Developer tool to enhance debugging
      *
      * See: http://webpack.github.io/docs/configuration.html#devtool
      * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
      */
-    devtool: 'cheap-module-source-map',
+    devtool: "cheap-module-source-map",
 
     /**
      * Options affecting the output of the compilation.
@@ -54,13 +52,12 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#output
      */
     output: {
-
       /**
        * The output directory as absolute path (required).
        *
        * See: http://webpack.github.io/docs/configuration.html#output-path
        */
-      path: helpers.root('dist'),
+      path: helpers.root("dist"),
 
       /**
        * Specifies the name of each output file on disk.
@@ -68,7 +65,7 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-filename
        */
-      filename: '[name].bundle.js',
+      filename: "[name].bundle.js",
 
       /**
        * The filename of the SourceMaps for the JavaScript files.
@@ -76,23 +73,21 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
        */
-      sourceMapFilename: '[file].map',
+      sourceMapFilename: "[file].map",
 
       /** The filename of non-entry chunks as relative path
        * inside the output.path directory.
        *
        * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
        */
-      chunkFilename: '[id].chunk.js',
+      chunkFilename: "[id].chunk.js",
 
-      library: 'ac_[name]',
-      libraryTarget: 'var',
+      library: "ac_[name]",
+      libraryTarget: "var"
     },
 
     module: {
-
       rules: [
-
         /**
          * Css loader support for *.css files (styles directory only)
          * Loads external css styles into the DOM, supports HMR
@@ -100,8 +95,8 @@ module.exports = function (options) {
          */
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
-          include: [helpers.root('src', 'styles')]
+          use: ["style-loader", "css-loader"],
+          include: [helpers.root("src", "styles")]
         },
 
         /**
@@ -111,16 +106,13 @@ module.exports = function (options) {
          */
         {
           test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
-          include: [helpers.root('src', 'styles')]
-        },
-
+          use: ["style-loader", "css-loader", "sass-loader"],
+          include: [helpers.root("src", "styles")]
+        }
       ]
-
     },
 
     plugins: [
-
       /**
        * Plugin: DefinePlugin
        * Description: Define free variables.
@@ -133,12 +125,12 @@ module.exports = function (options) {
        * NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
        */
       new DefinePlugin({
-        'ENV': JSON.stringify(METADATA.ENV),
-        'HMR': METADATA.HMR,
-        'process.env': {
-          'ENV': JSON.stringify(METADATA.ENV),
-          'NODE_ENV': JSON.stringify(METADATA.ENV),
-          'HMR': METADATA.HMR,
+        ENV: JSON.stringify(METADATA.ENV),
+        HMR: METADATA.HMR,
+        "process.env": {
+          ENV: JSON.stringify(METADATA.ENV),
+          NODE_ENV: JSON.stringify(METADATA.ENV),
+          HMR: METADATA.HMR
         }
       }),
 
@@ -202,11 +194,8 @@ module.exports = function (options) {
        */
       new LoaderOptionsPlugin({
         debug: true,
-        options: {
-
-        }
-      }),
-
+        options: {}
+      })
     ],
 
     /**
@@ -228,10 +217,10 @@ module.exports = function (options) {
         ignored: /node_modules/
       },
       /**
-      * Here you can access the Express app object and add your own custom middleware to it.
-      *
-      * See: https://webpack.github.io/docs/webpack-dev-server.html
-      */
+       * Here you can access the Express app object and add your own custom middleware to it.
+       *
+       * See: https://webpack.github.io/docs/webpack-dev-server.html
+       */
       setup: function(app) {
         // For example, to define custom handlers for some paths:
         // app.get('/some/path', function(req, res) {
@@ -239,7 +228,7 @@ module.exports = function (options) {
         // });
       },
       proxy: {
-        '/api':  `http://localhost:${process.env.SERVER_PORT || '4040'}`
+        "/api": `http://localhost:${process.env.SERVER_PORT || "4040"}`
       }
     },
 
@@ -251,12 +240,11 @@ module.exports = function (options) {
      */
     node: {
       global: true,
-      crypto: 'empty',
+      crypto: "empty",
       process: true,
       module: false,
       clearImmediate: false,
       setImmediate: false
     }
-
   });
-}
+};

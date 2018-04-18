@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { bracket } from "./data/data";
 
 @Component({
@@ -9,10 +9,12 @@ import { bracket } from "./data/data";
 export class TeamComponent {
   bracket = bracket;
 
-  recordTeam = team => {
-    console.log(team);
-  };
+  @Input() selection = [];
 
   constructor() {}
   ngOnInit() {}
+
+  recordTeam = (team, index) => {
+    this.selection[index] = team;
+  };
 }

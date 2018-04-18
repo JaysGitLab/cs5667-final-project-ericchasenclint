@@ -1,10 +1,11 @@
-<div class="select-team-container" *ngFor="let seed of bracket">
+<div class="seed-row" *ngFor="let seed of bracket; let i = index">
+  <h2 class="seed-title">{{seed[0]}}</h2>
   <table class="team-table">
     <tr class="team-row">
-      <td class="team" (click)="recordTeam(seed[0])">{{ seed[0] }}</td>
-      <td class="team" (click)="recordTeam(seed[1])">{{ seed[1] }}</td>
-      <td class="team" (click)="recordTeam(seed[2])">{{ seed[2] }}</td>
-      <td class="team" (click)="recordTeam(seed[3])">{{ seed[3] }}</td>
+      <td class="team" (click)="recordTeam(seed[1], i)">{{ seed[1] }}</td>
+      <td class="team" (click)="recordTeam(seed[2], i)">{{ seed[2] }}</td>
+      <td class="team" (click)="recordTeam(seed[3], i)">{{ seed[3] }}</td>
+      <td class="team" (click)="recordTeam(seed[4], i)">{{ seed[4] }}</td>
     </tr>
   </table>
 </div>
