@@ -1,31 +1,30 @@
-/*styles for home content only*/
 .select-team-container {
   margin: 75px 10% 75px 10%;
+}
+
+.seed-title {
+  margin-bottom: 15px;
 }
 
 .team-row {
   display: flex;
   border: 2px solid #13293d;
+  border-radius: 5px;
 }
 
 .team {
+  position: relative;
+  top: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 1;
-  border-right: 2px solid #006494;
   padding: 20px;
-}
-
-.team:last-of-type {
-  border-right: none;
-}
-
-.team-logo {
-  height: 100px;
-  width: 100px;
+  transition: all 0.75s ease;
+  cursor: pointer;
 }
 
 .team:hover {
-  background-color: aquamarine;
+  top: -5px;
+  box-shadow: 0 6px 5px rgba(0, 0, 0, 0.6);
 }

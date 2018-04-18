@@ -27,6 +27,7 @@ import { APP_RESOLVER_PROVIDERS } from "./app.resolver";
 import { AppState, InternalStateType } from "./app.service";
 import { HomeComponent } from "./home";
 import { ReactComponent } from "./react";
+import { TeamComponent } from "./team-select/team";
 import { TeamSelectComponent } from "./team-select";
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
@@ -54,6 +55,7 @@ type StoreType = {
     HomeComponent,
     ReactComponent,
     TeamSelectComponent,
+    TeamComponent,
     NoContentComponent
   ],
   /**
