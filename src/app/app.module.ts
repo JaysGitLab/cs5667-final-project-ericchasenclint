@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 import {
   NgModule,
   ApplicationRef
@@ -18,7 +20,10 @@ import {
   MatToolbarModule,
   MatCardModule,
   MatListModule,
-  MatGridListModule
+  MatGridListModule,
+  MatInputModule,
+  MatButtonModule,
+  MatExpansionModule
 } from '@angular/material';
 import 'hammerjs';
 
@@ -32,6 +37,13 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
+
+import { AuthenticationService } from './authentication.service';
+import { AuthGuardService } from './auth-guard.service';
+
 import { ReactComponent } from './react';
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from './no-content';
@@ -59,8 +71,11 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
+    ProfileComponent,
     HomeComponent,
     ReactComponent,
+    SigninComponent,
+    SignupComponent,
     NoContentComponent,
   ],
   /**
@@ -72,10 +87,14 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     MatToolbarModule,
     MatCardModule,
     MatListModule,
     MatGridListModule,
+    MatInputModule,
+    MatButtonModule,
+    MatExpansionModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
   ],
   /**
@@ -83,7 +102,9 @@ type StoreType = {
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AuthenticationService,
+    AuthGuardService
   ]
 })
 export class AppModule {

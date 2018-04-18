@@ -1,0 +1,14 @@
+<header>
+	<mat-toolbar color="primary">
+  	<a [routerLink]="['/']" class="logotTxt">MEAN</a>
+    <a class="links" [routerLink]="['/react']">React</a>
+
+		<a *ngIf="!auth.isLoggedIn()" routerLink="/signin">Sign in</a>
+    <a *ngIf="auth.isLoggedIn()" routerLink="/profile">{{ auth.getUserDetails()?.name }}</a>
+    <a *ngIf="auth.isLoggedIn()" (click)="auth.logout()">Logout</a>
+  </mat-toolbar>
+</header>
+    <router-outlet></router-outlet>
+<footer>
+</footer>
+

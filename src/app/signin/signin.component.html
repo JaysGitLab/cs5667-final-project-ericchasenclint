@@ -1,0 +1,30 @@
+<div class="container h-100" *ngIf="!user">
+<div class="row justify-content-center align-items-center h-100">
+<div class="col offset-md-3 text-center" ng-app="LoginForm">
+			<mat-card class="login" align="center">
+        <mat-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Login</span></h2>
+          </div>
+        </mat-toolbar>
+        <mat-card-content>
+          <form name="Form">
+            <br/>
+						<mat-form-field class="md-block">
+              <input matInput placeholder="login" required=""/>
+            </mat-form-field>
+
+            <mat-form-field class="md-block">
+              <input matInput placeholder="password" required=""/>
+            </mat-form-field>
+						<div class="md-block">
+							<button mat-raised-button routerLink="../signup">Register</button>
+							<button mat-raised-button ng-disabled="!Form.$valid" ng-click="vm.submit()" 
+								color="primary">Login</button>
+						</div>
+					</form>
+        </mat-card-content>
+      </mat-card>
+</div>
+</div>
+</div>
