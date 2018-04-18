@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { bracket } from "./data/data";
 
 @Component({
@@ -9,12 +9,23 @@ import { bracket } from "./data/data";
 export class TeamComponent {
   bracket = bracket;
 
-  @Input() selection = [];
+  selectedTeam: string;
+  selection = [];
+
+  @Output() sendSelections = new EventEmitter<any>();
 
   constructor() {}
   ngOnInit() {}
 
-  recordTeam = (team, index) => {
+  addTeamAndSend(team, index) {
     this.selection[index] = team;
-  };
+    this.sendSelections.emit(this.selection);
+  }
+
+  showSelectedTeam(team) {
+    let t = this.selection.find(t => {
+      return t === team;
+    });
+    return t;
+  }
 }

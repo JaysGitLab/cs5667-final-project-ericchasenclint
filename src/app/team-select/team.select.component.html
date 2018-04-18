@@ -1,6 +1,6 @@
 <div class="select-team-container">
-    <team></team>
-    <button class="btn" (click)="recordSelection()">Submit</button>
+  <team (sendSelections)="addTeams($event)"></team>
+  <button class="btn" (click)="submitSelection()">Submit</button>
 </div>
 
 

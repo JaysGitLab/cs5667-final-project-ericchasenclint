@@ -14,6 +14,7 @@
   display: flex;
   border: 2px solid #13293d;
   border-radius: 5px;
+  max-height: 62px;
 }
 
 .team {
@@ -22,13 +23,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 25%;
   padding: 20px;
-  transition: all 0.3s ease;
+  transition: top 0.3s ease, box-shadow 0.3s ease, font-size 0.5s ease,
+    background-color 0.3s ease;
   cursor: pointer;
 }
 
+.team.selected {
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  top: 0;
+  background-color: #006494;
+}
+
+.team.selected:hover {
+  box-shadow: none;
+  top: 0;
+  background-color: #006494;
+}
+
 .team:hover {
+  background-color: #f94f4f;
   top: -5px;
   box-shadow: 0 6px 5px rgba(0, 0, 0, 0.6);
 }

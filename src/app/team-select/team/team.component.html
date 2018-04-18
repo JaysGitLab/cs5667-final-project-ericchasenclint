@@ -2,10 +2,10 @@
   <h2 class="seed-title">{{seed[0]}}</h2>
   <table class="team-table">
     <tr class="team-row">
-      <td class="team" (click)="recordTeam(seed[1], i)">{{ seed[1] }}</td>
-      <td class="team" (click)="recordTeam(seed[2], i)">{{ seed[2] }}</td>
-      <td class="team" (click)="recordTeam(seed[3], i)">{{ seed[3] }}</td>
-      <td class="team" (click)="recordTeam(seed[4], i)">{{ seed[4] }}</td>
+      <td class="team" [class.selected]="showSelectedTeam(seed[1])" (click)="addTeamAndSend(seed[1], i)">{{ seed[1] }}</td>
+      <td class="team" [class.selected]="showSelectedTeam(seed[2])" (click)="addTeamAndSend(seed[2], i)">{{ seed[2] }}</td>
+      <td class="team" [class.selected]="showSelectedTeam(seed[3])" (click)="addTeamAndSend(seed[3], i)">{{ seed[3] }}</td>
+      <td class="team" [class.selected]="showSelectedTeam(seed[4])" (click)="addTeamAndSend(seed[4], i)">{{ seed[4] }}</td>
     </tr>
   </table>
 </div>
