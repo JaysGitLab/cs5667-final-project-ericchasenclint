@@ -7,7 +7,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from './authentication/authentication.service';
+import { Router } from '@angular/router';
+
 
 import { AppState } from './app.service';
 /**
@@ -23,11 +25,7 @@ import { AppState } from './app.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-
-  constructor(
-    public auth: AuthenticationService
-  ) { }
-
+  constructor(private _authenticationService: AuthenticationService, private router: Router){}
 }
 
 /**

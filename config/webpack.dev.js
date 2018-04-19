@@ -239,7 +239,7 @@ module.exports = function (options) {
         // });
       },
       proxy: {
-        '/api':  `cs5667.ml:3006` //${process.env.SERVER_PORT || '4041'}`
+        '/api':  `http://localhost:${process.env.SERVER_PORT || '4041'}`
       }
     },
 

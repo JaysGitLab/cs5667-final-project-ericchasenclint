@@ -1,28 +1,82 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+// Load the module dependencies
+const config = require('./config');
+const path = require('path');
+const http = require('http');
+const socketio = require('socket.io');
+const express = require('express');
+const morgan = require('morgan');
+const compress = require('compression');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+const passport = require('passport');
+const configureSocket = require('./socketio');
 
-passport.use(new LocalStrategy({
-    usernameField: 'email'
-  },
-  function(username, password, done) {
-    User.findOne({ email: username }, function (err, user) {
-      if (err) { return done(err); }
-      // Return if user not found in database
-      if (!user) {
-        return done(null, false, {
-          message: 'User not found'
-        });
-      }
-      // Return if password is wrong
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Password is wrong'
-        });
-      }
-      // If credentials are correct, return the user object
-      return done(null, user);
+// Define the Express configuration method
+module.exports = function(db) {
+    // Create a new Express application instance
+    const app = express();
+
+    // Create a new HTTP server
+    const server = http.createServer(app);
+
+    // Create a new Socket.io server
+    const io = socketio.listen(server);
+
+    // Use the 'NDOE_ENV' variable to activate the 'morgan' logger or 'compress'
+    if (process.env.NODE_ENV === 'development') {
+        app.use(morgan('dev'));
+    } else if (process.env.NODE_ENV === 'production') {
+        app.use(compress());
+    }
+
+    // Use the 'body-parser' and 'method-override' middleware functions
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyParser.json());
+    app.use(methodOverride());
+
+    // Configure the MongoDB session storage
+    const mongoStore = new MongoStore({
+        mongooseConnection: db.connection
     });
-  }
-));
+
+    // Configure the 'session' middleware
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret,
+        store: mongoStore
+    }));
+
+    // Set the application view engine and 'views' folder
+    app.set('views', './app/views');
+    app.set('view engine', 'ejs');
+
+    // Configure the flash messages middleware
+    app.use(flash());
+
+    // Configure the Passport middleware
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    // Configure static file serving
+    app.use('/', express.static(path.resolve('./public')));
+    app.use('/lib', express.static(path.resolve('./node_modules')));
+
+    // Load the routing files
+    var users = require('../routes/users.server.routes')(app);
+    var articles = require('../routes/articles.server.routes')(app);
+    var index = require('../routes/index.server.routes')(app);
+    
+    
+    // Load the Socket.io configuration
+    configureSocket(server, io, mongoStore);
+
+    // Return the Server instance
+    return server;
+};
+

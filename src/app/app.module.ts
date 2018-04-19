@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import {
   NgModule,
@@ -32,17 +33,16 @@ import 'hammerjs';
  */
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
+
+
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { ProfileComponent } from './profile/profile.component';
 
-import { AuthenticationService } from './authentication.service';
-import { AuthGuardService } from './auth-guard.service';
+import { HomeModule } from './home/home.module';
+import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 import { ReactComponent } from './react';
 //import { angularProfileCard } from '../../components/main-profile/index';
@@ -71,11 +71,7 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    ProfileComponent,
-    HomeComponent,
     ReactComponent,
-    SigninComponent,
-    SignupComponent,
     NoContentComponent,
   ],
   /**
@@ -86,6 +82,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HomeModule,
+    AuthenticationModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,
@@ -103,8 +101,7 @@ type StoreType = {
   providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    AuthenticationService,
-    AuthGuardService
+    AuthenticationService
   ]
 })
 export class AppModule {
