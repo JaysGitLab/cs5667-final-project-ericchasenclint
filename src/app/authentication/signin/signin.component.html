@@ -9,7 +9,11 @@
                 </mat-toolbar>
                 <mat-card-content>
                     <form name="Form">
-                        <br/>
+											  <br *ngIf="show" />
+												<div *ngIf="show" class="alert alert-warning" role="alert">
+													{{errorMessage}}
+												</div>	
+												<br/>
                         <mat-form-field class="md-block">
                             <input type="text" matInput placeholder="Email" required="" [(ngModel)]="credentials.username" name="username"/>
                         </mat-form-field>
