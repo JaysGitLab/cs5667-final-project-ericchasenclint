@@ -1,0 +1,26 @@
+<div>
+    <router-outlet></router-outlet>
+    <form class="createcontestform">
+        <mat-form-field class="yearfield">
+            <input matInput placeholder="Year" value="{{year}}">
+        </mat-form-field>
+        <br>
+        <mat-radio-group>
+            <mat-radio-button value="Women">Women</mat-radio-button>
+            <mat-radio-button value="Men">Men</mat-radio-button>
+        </mat-radio-group>
+            
+        <table>
+            <!--<tr>
+                <td></td>
+                <th *ngFor="let region of regions">{{region}}</th>
+            </tr>-->
+            <tr *ngFor="let seed of seeds">
+                <!--<th>{{seed}}</th>-->
+                <td *ngFor="let region of regions">
+                  <team-dropdown [region]="region" [seed]="seed" [contestinfo]="contestinfo"></team-dropdown>
+                <td>
+            </tr>
+        </table>
+    </form>
+</div>

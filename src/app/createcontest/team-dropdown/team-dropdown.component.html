@@ -1,7 +1,7 @@
 <mat-form-field class="dropdown-full-width">
-<input matInput placeholder="Team" aria-label="Team"
-       [matAutocomplete]="auto" [formControl]="teamCtrl">
-<mat-autocomplete #auto="matAutocomplete">
+<input matInput placeholder="{{seed}} {{region}}" aria-label="Team"
+       [matAutocomplete]="auto" [formControl]="teamCtrl" [(ngModel)]="selectedTeam">
+<mat-autocomplete #auto="matAutocomplete" >
   <mat-option *ngFor="let team of filteredTeams| async" [value]="team.name">
     <img style="vertical-align:middle;" aria-hidden
     src="https://sports.cbsimg.net/images/collegebasketball/logos/50x50/{{team.short}}.png" height="25" />

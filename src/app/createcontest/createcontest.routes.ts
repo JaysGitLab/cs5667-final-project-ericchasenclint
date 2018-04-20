@@ -6,7 +6,5 @@ import { TeamDropdownComponent } from './team-dropdown/team-dropdown.component';
 export const CreateContestRoutes: Routes = [{
     path: 'createcontest',
     component: CreateContestComponent,
-    children: [
-        { path: 'team-dropdown', component: TeamDropdownComponent},
-    ],
 }];
+

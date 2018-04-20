@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, Input} from '@angular/core';
+import {FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
+import { ContestInfo } from '../contestinfo'
 
 /**
  * @title TeamDropdown overview
@@ -15,15 +16,38 @@ import 'rxjs/add/operator/map';
   styleUrls: ['team-dropdown.component.scss']
 })
 export class TeamDropdownComponent {
+  @Input() seed
+  @Input() region
+  @Input() contestinfo
+
+  selectedTeam: any;
   teamCtrl: FormControl;
   filteredTeams: Observable<any[]>;
   constructor() {
-    this.teamCtrl = new FormControl();
+    this.teamCtrl = new FormControl(this.selectedTeam,
+        [Validators.required, this.knownTeamValidator()]
+    );
     this.filteredTeams = this.teamCtrl.valueChanges
         .startWith(null)
         .map(searchString=> searchString ? this.filterTeams(searchString) : []);
   }
-
+  knownTeamValidator(): ValidatorFn {
+      return (control: AbstractControl): {[key: string]: any} => {
+          const knownTeam = false;
+          for (let team of this.teams){
+              if (team.name == control.value){
+                  return null;
+              }
+          }
+          return {'unknownTeam': {value: control.value}};
+      }
+  }
+/*
+  onOptionSelected() {
+      this.contestinfo.setTeam(this.region, this.seed, this.selectedTeam);
+      console.log(this.contestinfo.toString());
+  }
+*/  
   teamMatches(searchTerms: string[], team: any){
     for(var strIdx=0; strIdx<searchTerms.length; strIdx++){
         let searchTerm = searchTerms[strIdx];

@@ -11,6 +11,7 @@ import {
   MatAutocompleteModule,
   MatInputModule,
   MatMenuModule,
+  MatRadioModule,
   MatRippleModule,
   MatSortModule,
 } from '@angular/material';
@@ -23,6 +24,7 @@ import {
         MatAutocompleteModule,
         MatInputModule,
         MatMenuModule,
+        MatRadioModule,
         MatRippleModule,
         MatSortModule,
         RouterModule.forChild(CreateContestRoutes),
