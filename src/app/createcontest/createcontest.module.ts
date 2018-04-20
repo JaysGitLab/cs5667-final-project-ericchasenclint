@@ -34,4 +34,4 @@ import {
 })
 
 
-export class CreateContestModule{}
+export class CreateContestModule{ }

@@ -1,12 +1,12 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-        <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-        <span>{{ state.name }}</span> |
-        <small>Population: {{state.population}}</small>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<mat-form-field class="dropdown-full-width">
+<input matInput placeholder="Team" aria-label="Team"
+       [matAutocomplete]="auto" [formControl]="teamCtrl">
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let team of filteredTeams| async" [value]="team.name">
+    <img style="vertical-align:middle;" aria-hidden
+    src="https://sports.cbsimg.net/images/collegebasketball/logos/50x50/{{team.short}}.png" height="25" />
+    <span>{{ team.name }}</span> |
+    <small>{{ team.detail }}</small>
+  </mat-option>
+</mat-autocomplete>
+</mat-form-field>
