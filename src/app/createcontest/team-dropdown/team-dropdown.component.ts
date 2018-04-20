@@ -2,26 +2,22 @@ import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
-import {map} from 'rxjs/operators/map';
-
-export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
-}
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 /**
- * @title Autocomplete overview
+ * @title TeamDropdown overview
  */
 @Component({
-  selector: 'team-dropdown',
+  selector: 'team-dropdown.component',
   templateUrl: 'team-dropdown.component.html',
   styleUrls: ['team-dropdown.component.css']
 })
-export class TeamDropdown {
+export class TeamDropdownComponent {
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
 
-  states: State[] = [
+  states: any[] = [
     {
       name: 'Arkansas',
       population: '2.978M',
@@ -51,10 +47,8 @@ export class TeamDropdown {
   constructor() {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(state => state ? this.filterStates(state) : this.states.slice())
-      );
+        .startWith(null)
+        .map(state => state ? this.filterStates(state) : this.states.slice());
   }
 
   filterStates(name: string) {
@@ -63,8 +57,3 @@ export class TeamDropdown {
   }
 
 }
-
-
-/**  Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license */

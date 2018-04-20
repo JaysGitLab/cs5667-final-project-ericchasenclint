@@ -43,6 +43,7 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeModule } from './home/home.module';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { CreateContestModule } from './createcontest/createcontest.module';
 
 import { ReactComponent } from './react';
 //import { angularProfileCard } from '../../components/main-profile/index';
@@ -84,6 +85,7 @@ type StoreType = {
     ReactiveFormsModule,
     HomeModule,
     AuthenticationModule,
+    CreateContestModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,
