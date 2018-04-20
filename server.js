@@ -9,6 +9,6 @@ const db = configureMongoose();
 const app = configureExpress(db);
 const passport = configurePassport();
 
-app.listen(4041);
+app.listen(4040);
 
 export default app;
