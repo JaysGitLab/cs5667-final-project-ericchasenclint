@@ -1,12 +1,23 @@
-import {Component, Input} from '@angular/core';
-import {FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
-import { ContestInfo } from '../contestinfo'
-
+class TeamValidator{
+  static knownTeamValidator(): ValidatorFn {
+      return (control: AbstractControl): {[key: string]: any} => {
+          const knownTeam = false;
+          for (let team of Teams.teams){
+              if (team.name == control.value){
+                  return null;
+              }
+          }
+          return {'unknownTeam': {value: control.value}};
+      }
+  }
+}
 /**
  * @title TeamDropdown overview
  */
@@ -16,38 +27,33 @@ import { ContestInfo } from '../contestinfo'
   styleUrls: ['team-dropdown.component.scss']
 })
 export class TeamDropdownComponent {
-  @Input() seed
-  @Input() region
-  @Input() contestinfo
-
-  selectedTeam: any;
+  @Input() seed: number;
+  @Input() region: string;
+  @Input() contestFormGroup: FormGroup;
+  teamCtrlGroup: FormGroup;
   teamCtrl: FormControl;
   filteredTeams: Observable<any[]>;
-  constructor() {
-    this.teamCtrl = new FormControl(this.selectedTeam,
-        [Validators.required, this.knownTeamValidator()]
-    );
+  static buildFormGroup() {
+    return new FormGroup({
+        teamFormCtrl: new FormControl("", [Validators.required,
+                                   TeamValidator.knownTeamValidator()])
+    });
+  }
+  ngOnInit() {
+    this.teamCtrlGroup = <FormGroup>this.contestFormGroup.get(this.seed + this.region);
+    this.teamCtrl = <FormControl>this.teamCtrlGroup.get('teamFormCtrl');
     this.filteredTeams = this.teamCtrl.valueChanges
         .startWith(null)
         .map(searchString=> searchString ? this.filterTeams(searchString) : []);
   }
-  knownTeamValidator(): ValidatorFn {
-      return (control: AbstractControl): {[key: string]: any} => {
-          const knownTeam = false;
-          for (let team of this.teams){
-              if (team.name == control.value){
-                  return null;
-              }
-          }
-          return {'unknownTeam': {value: control.value}};
-      }
+  
+  fieldCss(): string {
+    if (!this.teamCtrl.valid && this.teamCtrl.dirty){
+       return "mat-form-field-invalid";
+    } else {
+        return "";
+    }
   }
-/*
-  onOptionSelected() {
-      this.contestinfo.setTeam(this.region, this.seed, this.selectedTeam);
-      console.log(this.contestinfo.toString());
-  }
-*/  
   teamMatches(searchTerms: string[], team: any){
     for(var strIdx=0; strIdx<searchTerms.length; strIdx++){
         let searchTerm = searchTerms[strIdx];
@@ -64,15 +70,18 @@ export class TeamDropdownComponent {
     searchString = searchString.toLocaleLowerCase();
     let searchTerms: string[] = searchString.split(" ");
     let matches: any[] = [];
-    for(var teamIdx: number = 0; teamIdx < this.teams.length; teamIdx++){
-       if (this.teamMatches(searchTerms, this.teams[teamIdx])){
-          matches.push(this.teams[teamIdx]);
+    for(var teamIdx: number = 0; teamIdx < Teams.teams.length; teamIdx++){
+       if (this.teamMatches(searchTerms, Teams.teams[teamIdx])){
+          matches.push(Teams.teams[teamIdx]);
        }
     }
     return matches;
   }
 
-  teams: any[] = [
+}
+
+class Teams {
+  static teams: any[] = [
     {"detail": "Abilene Christian Wildcats", "short": "ABIL", "name": "Abilene Christian"},
     {"detail": "Air Force Falcons", "short": "AF", "name": "Air Force"},
     {"detail": "Akron Zips", "short": "AKRON", "name": "Akron"},
@@ -424,5 +433,4 @@ export class TeamDropdownComponent {
     {"detail": "Xavier Musketeers", "short": "XAVIER", "name": "Xavier"},
     {"detail": "Yale Bulldogs", "short": "YALE", "name": "Yale"},
     {"detail": "Youngstown State Penguins", "short": "YOUNG", "name": "Youngstown State"}];
-
 }

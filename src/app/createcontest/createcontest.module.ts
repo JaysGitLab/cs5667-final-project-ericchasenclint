@@ -9,6 +9,7 @@ import { TeamDropdownComponent } from './team-dropdown/team-dropdown.component';
 
 import {
   MatAutocompleteModule,
+  MatButtonModule,
   MatInputModule,
   MatMenuModule,
   MatRadioModule,
@@ -22,6 +23,7 @@ import {
         FormsModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
+        MatButtonModule,
         MatInputModule,
         MatMenuModule,
         MatRadioModule,
