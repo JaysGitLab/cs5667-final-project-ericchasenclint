@@ -3,6 +3,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { NgModule, ApplicationRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule, RequestOptions } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
+import {
+  NgModule,
+  ApplicationRef
+} from '@angular/core';
 import {
   removeNgStyles,
   createNewHosts,
@@ -16,10 +26,19 @@ import {
   MatGridListModule
 } from "@angular/material";
 import "hammerjs";
+=======
+  MatGridListModule,
+  MatInputModule,
+  MatButtonModule,
+  MatExpansionModule
+} from '@angular/material';
+import 'hammerjs';
+
 
 /*
  * Platform and Environment providers/directives/pipes
  */
+
 import { ENV_PROVIDERS } from "./environment";
 import { ROUTES } from "./app.routes";
 // App is our top level component
@@ -30,6 +49,22 @@ import { HomeComponent } from "./home";
 import { ReactComponent } from "./react";
 import { TeamComponent } from "./team-select/team";
 import { TeamSelectComponent } from "./team-select";
+
+import { ENV_PROVIDERS } from './environment';
+import { ROUTES } from './app.routes';
+
+
+// App is our top level component
+import { AppComponent } from './app.component';
+import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+import { AppState, InternalStateType } from './app.service';
+
+import { HomeModule } from './home/home.module';
+import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationModule } from './authentication/authentication.module';
+
+import { ReactComponent } from './react';
+
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -53,7 +88,6 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    HomeComponent,
     ReactComponent,
     TeamSelectComponent,
     TeamComponent,
@@ -68,20 +102,34 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HomeModule,
+    AuthenticationModule,
     HttpModule,
+    HttpClientModule,
     MatToolbarModule,
     MatCardModule,
     MatListModule,
     MatGridListModule,
+
     RouterModule.forRoot(ROUTES, {
       useHash: false,
       preloadingStrategy: PreloadAllModules
     })
+
+    MatInputModule,
+    MatButtonModule,
+    MatExpansionModule,
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
-  providers: [ENV_PROVIDERS, APP_PROVIDERS]
+  providers: [
+    ENV_PROVIDERS,
+    APP_PROVIDERS,
+    AuthenticationService
+  ]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) {}

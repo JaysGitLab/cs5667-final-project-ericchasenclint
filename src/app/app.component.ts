@@ -6,6 +6,11 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
+
+import { AuthenticationService } from './authentication/authentication.service';
+import { Router } from '@angular/router';
+
+
 import { AppState } from './app.service';
 /**
  * App Component
@@ -17,31 +22,10 @@ import { AppState } from './app.service';
   styleUrls: [
     './app.component.scss'
   ],
-  template: `
-    <header>
-      <mat-toolbar color="primary">
-        <a [routerLink]="['/']" class="logotTxt">MEAN</a>
-        <a class="links" [routerLink]="['/react']">React</a>
-      </mat-toolbar>
-    </header>
-    <router-outlet></router-outlet>
-    <footer>
-    </footer>
-  `,
+  templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
-  public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Mean stack starter';
-  public url = 'https://mean.io';
-
-  constructor(
-    public appState: AppState
-  ) { }
-
-  public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
-  }
-
+export class AppComponent {
+  constructor(private _authenticationService: AuthenticationService, private router: Router){}
 }
 
 /**

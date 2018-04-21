@@ -1,0 +1,33 @@
+<div class="container h-100" >
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col offset-md-3 text-center" ng-app="SigninForm">
+            <mat-card class="signup" align="center">
+                <mat-toolbar>
+                  <div class="md-toolbar-tools">
+                    <h2><span>Signup</span></h2>
+                  </div>
+                </mat-toolbar>
+                <mat-card-content>
+                    <form (submit)="signup()">
+                      <br />
+                      <mat-form-field class="md-block">
+                        <input type="text" matInput name="fullName" placeholder="Enter your full name" [(ngModel)]="user.fullName" required="" />
+                      </mat-form-field>
+                   
+                      <mat-form-field class="md-block">
+                        <input type="email" matInput name="username" placeholder="Enter email" [(ngModel)]="user.username" required="" />
+                      </mat-form-field>
+                      
+                      <mat-form-field class="md-block">
+                        <input type="password" matInput name="password" placeholder="Password" [(ngModel)]="user.password" required="" />
+                      </mat-form-field>
+                      
+                      <div class="md-block">
+                        <button mat-raised-button type="submit" color="primary">Register</button>
+                      </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

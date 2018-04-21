@@ -1,98 +1,82 @@
-import express from 'express';
-import logger from 'morgan';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import compress from 'compression';
-import methodOverride from 'method-override';
-import cors from 'cors';
-import httpStatus from 'http-status';
-import expressWinston from 'express-winston';
-import expressValidation from 'express-validation';
-import helmet from 'helmet';
-import winstonInstance from './winston';
-import routes from '../routes/index.route';
-import config from './config';
-import APIError from '../helpers/APIError';
-import path from 'path';
-import appRoot from 'app-root-path';
-import innograph from 'innograph'
-import postCtrl from '../controllers/post.controller';
+// Load the module dependencies
+const config = require('./config');
+const path = require('path');
+const http = require('http');
+const socketio = require('socket.io');
+const express = require('express');
+const morgan = require('morgan');
+const compress = require('compression');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+const passport = require('passport');
+const configureSocket = require('./socketio');
 
+// Define the Express configuration method
+module.exports = function(db) {
+    // Create a new Express application instance
+    const app = express();
 
-const app = express();
+    // Create a new HTTP server
+    const server = http.createServer(app);
 
-if (config.env === 'development') {
-  app.use(logger('dev'));
-}
+    // Create a new Socket.io server
+    const io = socketio.listen(server);
 
-// parse body params and attache them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+    // Use the 'NDOE_ENV' variable to activate the 'morgan' logger or 'compress'
+    if (process.env.NODE_ENV === 'development') {
+        app.use(morgan('dev'));
+    } else if (process.env.NODE_ENV === 'production') {
+        app.use(compress());
+    }
 
-app.use(cookieParser());
-app.use(compress());
-app.use(methodOverride());
+    // Use the 'body-parser' and 'method-override' middleware functions
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyParser.json());
+    app.use(methodOverride());
 
-// secure apps by setting various HTTP headers
-app.use(helmet());
+    // Configure the MongoDB session storage
+    const mongoStore = new MongoStore({
+        mongooseConnection: db.connection
+    });
 
-// enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+    // Configure the 'session' middleware
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret,
+        store: mongoStore
+    }));
 
-// enable detailed API logging in dev env
-if (config.env === 'development') {
-  expressWinston.requestWhitelist.push('body');
-  expressWinston.responseWhitelist.push('body');
-  // app.use(expressWinston.logger({
-  //   winstonInstance,
-  //   meta: true, // optional: log meta data about request (defaults to true)
-  //   msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-  //   colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-  // }));
-}
-app.use(express.static(path.join(appRoot.path, 'dist')));
+    // Set the application view engine and 'views' folder
+    app.set('views', './app/views');
+    app.set('view engine', 'ejs');
 
-app.use('/api', routes);
+    // Configure the flash messages middleware
+    app.use(flash());
 
-innograph.init('/api/graphql', app, {post: postCtrl});
+    // Configure the Passport middleware
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(appRoot.path, 'dist/index.html'));
-});
+    // Configure static file serving
+    app.use('/', express.static(path.resolve('./public')));
+    app.use('/lib', express.static(path.resolve('./node_modules')));
 
-// if error is not an instanceOf APIError, convert it.
-app.use((err, req, res, next) => {
-  if (err instanceof expressValidation.ValidationError) {
-    // validation error contains errors which is an array of error each containing message[]
-    const unifiedErrorMessage = err.errors.map(error => error.messages.join('. ')).join(' and ');
-    const error = new APIError(unifiedErrorMessage, err.status, true);
-    return next(error);
-  } else if (!(err instanceof APIError)) {
-    const apiError = new APIError(err.message, err.status, err.isPublic);
-    return next(apiError);
-  }
-  return next(err);
-});
+    // Load the routing files
+    var users = require('../routes/users.server.routes')(app);
+    var articles = require('../routes/articles.server.routes')(app);
+    var index = require('../routes/index.server.routes')(app);
+    
+    
+    // Load the Socket.io configuration
+    configureSocket(server, io, mongoStore);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new APIError('API not found', httpStatus.NOT_FOUND);
-  return next(err);
-});
+    // Return the Server instance
+    return server;
+};
 
-// log error in winston transports except when executing test suite
-if (config.env !== 'test') {
-  app.use(expressWinston.errorLogger({
-    winstonInstance
-  }));
-}
-
-// error handler, send stacktrace only during development
-app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
-  res.status(err.status).json({
-    message: err.isPublic ? err.message : httpStatus[err.status],
-    stack: config.env === 'development' ? err.stack : {}
-  })
-);
-
-export default app;

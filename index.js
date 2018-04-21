@@ -20,6 +20,8 @@ mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);
 });
 
+require('./models/user');
+
 // print mongoose logs in dev env
 if (config.MONGOOSE_DEBUG) {
   mongoose.set('debug', (collectionName, method, query, doc) => {

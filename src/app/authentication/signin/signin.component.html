@@ -1,0 +1,29 @@
+<div class="container h-100" *ngIf="!user">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col offset-md-3 text-center" ng-app="LoginForm">
+            <mat-card class="login" align="center">
+                <mat-toolbar>
+                  <div class="md-toolbar-tools">
+                    <h2><span>Login</span></h2>
+                  </div>
+                </mat-toolbar>
+                <mat-card-content>
+                    <form name="Form">
+                        <br/>
+                        <mat-form-field class="md-block">
+                            <input type="text" matInput placeholder="Email" required="" [(ngModel)]="credentials.username" name="username"/>
+                        </mat-form-field>
+
+                        <mat-form-field class="md-block">
+                            <input type="password" matInput placeholder="Password" required="" [(ngModel)]="credentials.password" name="password"/>
+                        </mat-form-field>
+                        <div class="md-block">
+                            <button mat-raised-button routerLink="../signup">Register</button>
+                            <button mat-raised-button (click)="signin()" color="primary">Login</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
