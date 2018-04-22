@@ -26,13 +26,6 @@ import {
   MatGridListModule
 } from "@angular/material";
 import "hammerjs";
-=======
-  MatGridListModule,
-  MatInputModule,
-  MatButtonModule,
-  MatExpansionModule
-} from '@angular/material';
-import 'hammerjs';
 
 
 /*
