@@ -60,10 +60,9 @@ export class CreateContestComponent implements OnInit{
         return JSON.stringify(out);
     }
     onSubmit() {
-        console.log(this.prepareSaveContest());
         if (this.contestform.valid) {
-            alert("form is valid");
             this.showInvalidWarning = false;
+            contest = this.prepareSaveContest();
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){
