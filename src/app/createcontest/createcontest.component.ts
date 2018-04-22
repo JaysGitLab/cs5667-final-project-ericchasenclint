@@ -47,9 +47,20 @@ export class CreateContestComponent implements OnInit{
         }
     }
 
-    
-    
+    prepareSaveContest(): any{
+//        return JSON.stringify(this.contestform.getRawValue());
+        let out = {};
+        out["year"] = this.contestform.get('year').value;
+        out["gender"] = this.contestform.get('gender').value;
+        for (let seed of this.seeds){
+            for (let region of this.regions ){
+                out[seed+region] = this.contestform.get(seed+region).get('teamFormCtrl').value;
+            }
+        }
+        return JSON.stringify(out);
+    }
     onSubmit() {
+        console.log(this.prepareSaveContest());
         if (this.contestform.valid) {
             alert("form is valid");
             this.showInvalidWarning = false;
