@@ -1,0 +1,42 @@
+.navbar-top {
+  height: 5px;
+  background-color: #059eff;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+  border-bottom: 2px solid #e8f1f2;
+}
+
+.logo {
+  height: 100px;
+}
+
+.link {
+  margin-right: 20px;
+}
+
+.edge-link,
+.link {
+  color: #13293d;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #059eff;
+}
+
+.primary-cta {
+  border: 2px solid #059eff;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: background-color 0.5s ease;
+}
+
+.primary-cta:hover {
+  background-color: #059eff;
+  color: #fff;
+}
