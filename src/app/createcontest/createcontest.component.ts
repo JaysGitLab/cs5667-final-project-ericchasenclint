@@ -63,6 +63,7 @@ export class CreateContestComponent implements OnInit{
         return out;
     }
     onSubmit() {
+        if (this.contestform.valid) {
             this.showInvalidWarning = false;
             let contest = this.prepareSaveContest();
             this._contestService
@@ -71,7 +72,6 @@ export class CreateContestComponent implements OnInit{
 //                        error => this.errorMessage = error);
                 .subscribe(createdContest => this._router.navigate(['/']),
                         error => this.errorMessage = error);
-        if (this.contestform.valid) {
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){
