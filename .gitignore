@@ -71,4 +71,4 @@ dll/
 *.ngsummary.json
 *.shim.ngstyle.ts
 
-config/webpack.dev.js
+package-lock.json
