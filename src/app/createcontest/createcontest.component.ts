@@ -62,7 +62,7 @@ export class CreateContestComponent implements OnInit{
     onSubmit() {
         if (this.contestform.valid) {
             this.showInvalidWarning = false;
-            contest = this.prepareSaveContest();
+            let contest = this.prepareSaveContest();
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){
