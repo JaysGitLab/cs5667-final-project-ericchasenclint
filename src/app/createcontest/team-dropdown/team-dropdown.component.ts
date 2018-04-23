@@ -35,7 +35,7 @@ export class TeamDropdownComponent {
   filteredTeams: Observable<any[]>;
   static buildFormGroup() {
     return new FormGroup({
-        teamFormCtrl: new FormControl("", [Validators.required,
+        teamFormCtrl: new FormControl("Appalachian State", [Validators.required,
                                    TeamValidator.knownTeamValidator()])
     });
   }

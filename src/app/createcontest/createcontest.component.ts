@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
 
 
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
-//import { CreateContestService } from './createcontest.service';
+import { ContestService } from './createcontest.service';
 
 import { ContestInfo } from './contestinfo'
 
 @Component({
     selector: 'createcontest',
     templateUrl: './createcontest.component.html',
-    styleUrls: ['createcontest.component.scss']
+    styleUrls: ['createcontest.component.scss'],
+    providers: [ContestService]
 })
 export class CreateContestComponent implements OnInit{
     regions: string[] = ["North", "South", "East", "West"];
@@ -24,7 +24,8 @@ export class CreateContestComponent implements OnInit{
 
     contestform: FormGroup;
 
-    constructor (private fb: FormBuilder) {
+    constructor (private fb: FormBuilder, private _router: Router,
+        private _contestService: ContestService) {
     }
 
     ngOnInit() {
@@ -59,12 +60,18 @@ export class CreateContestComponent implements OnInit{
                 out[seed+region] = this.contestform.get(seed+region).get('teamFormCtrl').value;
             }
         }
-        return JSON.stringify(out);
+        return out;
     }
     onSubmit() {
-        if (this.contestform.valid) {
             this.showInvalidWarning = false;
             let contest = this.prepareSaveContest();
+            this._contestService
+                .create(contest)
+//                .subscribe(createdContest => this._router.navigate(['/select', createdContest._id]),
+//                        error => this.errorMessage = error);
+                .subscribe(createdContest => this._router.navigate(['/']),
+                        error => this.errorMessage = error);
+        if (this.contestform.valid) {
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){

@@ -1,9 +1,7 @@
 const Contest = require('mongoose').model('Contest');
 
 exports.create = function(req, res, next) {
-    console.log(req.body);
     const contest= new Contest(req.body);
-    console.log(contest);
     contest.save((err) => {
         if (err) {
             return next(err);
