@@ -1,22 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, RequestOptions } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpModule, RequestOptions } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 import {
-  NgModule,
-  ApplicationRef
-} from '@angular/core';
+  LocationStrategy,
+  HashLocationStrategy,
+  CommonModule
+} from "@angular/common";
+
+import { NgModule, ApplicationRef } from "@angular/core";
 import {
   removeNgStyles,
   createNewHosts,
   createInputTransfer
-} from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules
-} from '@angular/router';
+} from "@angularclass/hmr";
+import { RouterModule, PreloadAllModules } from "@angular/router";
 import {
   MatToolbarModule,
   MatCardModule,
@@ -25,39 +23,45 @@ import {
   MatInputModule,
   MatButtonModule,
   MatExpansionModule
-} from '@angular/material';
-import 'hammerjs';
+} from "@angular/material";
+import "hammerjs";
 
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
 
+import { ENV_PROVIDERS } from "./environment";
+import { ROUTES } from "./app.routes";
+
+// Components
+
+import { HomeComponent } from "./home";
+import { ReactComponent } from "./react";
+import { TeamComponent } from "./team-select/team";
+import { TeamSelectComponent } from "./team-select";
 
 // App is our top level component
-import { AppComponent } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
+import { AppComponent } from "./app.component";
+import { APP_RESOLVER_PROVIDERS } from "./app.resolver";
+import { AppState, InternalStateType } from "./app.service";
 
+// Modules
 import { HomeModule } from './home/home.module';
-import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CreateContestModule } from './createcontest/createcontest.module';
 
-import { ReactComponent } from './react';
-//import { angularProfileCard } from '../../components/main-profile/index';
-import { NoContentComponent } from './no-content';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Services
+import { AuthenticationService } from "./authentication/authentication.service";
 
-import '../styles/styles.scss';
-import '../styles/headings.css';
+//import { angularProfileCard } from '../../components/main-profile/index';
+import { NoContentComponent } from "./no-content";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import "../styles/styles.scss";
+import "../styles/headings.css";
 
 // Application wide providers
-const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
-];
+const APP_PROVIDERS = [...APP_RESOLVER_PROVIDERS, AppState];
 
 type StoreType = {
   state: InternalStateType,
@@ -73,13 +77,16 @@ type StoreType = {
   declarations: [
     AppComponent,
     ReactComponent,
-    NoContentComponent,
+    TeamSelectComponent,
+    TeamComponent,
+    NoContentComponent
   ],
   /**
    * Import Angular's modules.
    */
   imports: [
     BrowserAnimationsModule,
+    CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -95,29 +102,24 @@ type StoreType = {
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
-    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(ROUTES, {
+      useHash: false,
+      preloadingStrategy: PreloadAllModules
+    })
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
-  providers: [
-    ENV_PROVIDERS,
-    APP_PROVIDERS,
-    AuthenticationService
-  ]
+  providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService]
 })
 export class AppModule {
-
-  constructor(
-    public appRef: ApplicationRef,
-    public appState: AppState
-  ) { }
+  constructor(public appRef: ApplicationRef, public appState: AppState) { }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
       return;
     }
-    console.log('HMR store', JSON.stringify(store, null, 2));
+    console.log("HMR store", JSON.stringify(store, null, 2));
     /**
      * Set state
      */
@@ -125,7 +127,7 @@ export class AppModule {
     /**
      * Set input values
      */
-    if ('restoreInputValues' in store) {
+    if ("restoreInputValues" in store) {
       let restoreInputValues = store.restoreInputValues;
       setTimeout(restoreInputValues);
     }
@@ -136,7 +138,9 @@ export class AppModule {
   }
 
   public hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
+    const cmpLocation = this.appRef.components.map(
+      cmp => cmp.location.nativeElement
+    );
     /**
      * Save state
      */
@@ -163,5 +167,4 @@ export class AppModule {
     store.disposeOldHosts();
     delete store.disposeOldHosts;
   }
-
 }
