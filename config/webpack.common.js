@@ -30,7 +30,7 @@ const ngcWebpack = require('ngc-webpack');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'McRae\'s Bracket Pool',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR
@@ -63,8 +63,7 @@ module.exports = function (options) {
     entry: {
 
       'polyfills': './src/polyfills.browser.ts',
-      'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
+      'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts'
 
     },
 
@@ -116,13 +115,12 @@ module.exports = function (options) {
           exclude: /node_modules/,
           loader: 'babel-loader',
           query: {
-              presets: ['es2015', 'react']
+            presets: ['es2015', 'react']
           }
         },
         {
           test: /\.ts$/,
-          use: [
-            {
+          use: [{
               loader: '@angularclass/hmr-loader',
               options: {
                 pretty: !isProd,
@@ -207,7 +205,7 @@ module.exports = function (options) {
         },
 
         /* File loader for supporting fonts, for example, in CSS files.
-        */
+         */
         {
           test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
           use: 'file-loader'
@@ -296,11 +294,17 @@ module.exports = function (options) {
        *
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
-      new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
-      ],
-        isProd ? { ignore: [ 'mock-data/**/*' ] } : undefined
+      new CopyWebpackPlugin([{
+            from: 'src/assets',
+            to: 'assets'
+          },
+          {
+            from: 'src/meta'
+          }
+        ],
+        isProd ? {
+          ignore: ['mock-data/**/*']
+        } : undefined
       ),
 
       /*
@@ -337,13 +341,13 @@ module.exports = function (options) {
       }),
 
       /*
-      * Plugin: HtmlWebpackPlugin
-      * Description: Simplifies creation of HTML files to serve your webpack bundles.
-      * This is especially useful for webpack bundles that include a hash in the filename
-      * which changes every compilation.
-      *
-      * See: https://github.com/ampedandwired/html-webpack-plugin
-      */
+       * Plugin: HtmlWebpackPlugin
+       * Description: Simplifies creation of HTML files to serve your webpack bundles.
+       * This is especially useful for webpack bundles that include a hash in the filename
+       * which changes every compilation.
+       *
+       * See: https://github.com/ampedandwired/html-webpack-plugin
+       */
       new HtmlWebpackPlugin({
         template: 'src/index.html',
         title: METADATA.title,
