@@ -35,7 +35,7 @@ export class TeamDropdownComponent {
   filteredTeams: Observable<any[]>;
   static buildFormGroup() {
     return new FormGroup({
-        teamFormCtrl: new FormControl("Appalachian State", [Validators.required,
+        teamFormCtrl: new FormControl("", [Validators.required,
                                    TeamValidator.knownTeamValidator()])
     });
   }
@@ -44,7 +44,7 @@ export class TeamDropdownComponent {
     this.teamCtrl = <FormControl>this.teamCtrlGroup.get('teamFormCtrl');
     this.filteredTeams = this.teamCtrl.valueChanges
         .startWith(null)
-        .map(searchString=> searchString ? this.filterTeams(searchString) : []);
+        .map(searchString => searchString ? this.filterTeams(searchString) : Teams.teams.slice());
   }
   
   fieldCss(): string {
