@@ -46,10 +46,10 @@ import { APP_RESOLVER_PROVIDERS } from "./app.resolver";
 import { AppState, InternalStateType } from "./app.service";
 
 // Modules
-
-import { HomeModule } from "./home/home.module";
+import { HomeModule } from './home/home.module';
 import { NavBarModule } from './navbar/navbar.module';
-import { AuthenticationModule } from "./authentication/authentication.module";
+import { AuthenticationModule } from './authentication/authentication.module';
+import { CreateContestModule } from './createcontest/createcontest.module';
 
 // Services
 import { AuthenticationService } from "./authentication/authentication.service";
@@ -94,6 +94,7 @@ type StoreType = {
     HomeModule,
     NavBarModule,
     AuthenticationModule,
+    CreateContestModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,
