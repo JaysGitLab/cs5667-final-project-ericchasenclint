@@ -48,6 +48,7 @@ import { AppState, InternalStateType } from "./app.service";
 // Modules
 
 import { HomeModule } from "./home/home.module";
+import { NavBarModule } from './navbar/navbar.module';
 import { AuthenticationModule } from "./authentication/authentication.module";
 
 // Services
@@ -91,6 +92,7 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     HomeModule,
+    NavBarModule,
     AuthenticationModule,
     HttpModule,
     HttpClientModule,
