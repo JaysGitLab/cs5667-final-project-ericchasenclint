@@ -64,9 +64,9 @@ import "../styles/headings.css";
 const APP_PROVIDERS = [...APP_RESOLVER_PROVIDERS, AppState];
 
 type StoreType = {
-  state: InternalStateType;
-  restoreInputValues: () => void;
-  disposeOldHosts: () => void;
+  state: InternalStateType,
+  restoreInputValues: () => void,
+  disposeOldHosts: () => void
 };
 
 /**
@@ -112,7 +112,7 @@ type StoreType = {
   providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, public appState: AppState) {}
+  constructor(public appRef: ApplicationRef, public appState: AppState) { }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
