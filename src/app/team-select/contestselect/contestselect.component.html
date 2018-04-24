@@ -1,0 +1,5 @@
+<h1>Which contest would you like to enter?</h1>
+<button *ngFor="let contest of currentContests"
+        class="contestbutton"
+        (click)="selectcontest(contest)"
+        mat-raised-button>{{contest.year}} {{contest.gender}}'s</button>

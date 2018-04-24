@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ContestService } from "../../createcontest/createcontest.service";
 
@@ -10,6 +11,7 @@ import { seedText } from "./data/data";
   templateUrl: "./team.component.html"
 })
 export class TeamComponent {
+  paramsObserver: any;
   teamsReady = false;
   teams = [];
   seedText = seedText;
@@ -19,9 +21,17 @@ export class TeamComponent {
 
   @Output() sendSelections = new EventEmitter<any>();
 
-  constructor(private _contestService: ContestService) {}
+  constructor(
+      private _router: Router,
+      private _contestService: ContestService,
+      private _route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+      this.paramsObserver = this._route.parent.params.subscribe(params => {
+          let contestId = params['contestId'];
+          console.log("contestId from TeamComponent: " + contestId);
+      });
       this.loadContests("5add3d037ab5003ee77c7d4e");
   }
 
@@ -40,7 +50,10 @@ export class TeamComponent {
                  }
                  this.teamsReady = true;
              },
-             error => console.log("from team.component: " + error)
+             error => {
+                 console.log("from team.component: " + error);
+                 this._router.navigate(['/']);
+             }
          );
 
   }

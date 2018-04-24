@@ -18,6 +18,13 @@ export class ContestService {
             .map((res : Response)  => res.json())
             .catch(this.handleError);
     }
+    list(): Observable<any> {
+        return this._http
+            .get(`${this._baseURL}`)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+    
     read(contestId: string): Observable<any> {
         return this._http
             .get(`${this._baseURL}/${contestId}`)

@@ -4,16 +4,25 @@ import { RouterModule } from '@angular/router';
 
 import { TeamSelectRoutes } from './team.select.routes.ts';
 import { TeamComponent } from "./team/team.component.ts";
-import { TeamSelectComponent } from"./team.select.component.ts"; 
+import { TeamSelectComponent } from "./team.select.component.ts";
+import { ContestSelectComponent } from "./contestselect/contestselect.component";
+
+import {
+    MatButtonModule,
+    MatRippleModule
+} from '@angular/material'
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(TeamSelectRoutes)
+        RouterModule.forChild(TeamSelectRoutes),
+        MatButtonModule,
+        MatRippleModule
     ],
     declarations: [
         TeamComponent,
-        TeamSelectComponent
+        TeamSelectComponent,
+        ContestSelectComponent
     ]
 })
 export class TeamSelectModule { }
