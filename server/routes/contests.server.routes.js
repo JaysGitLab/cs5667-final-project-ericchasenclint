@@ -4,11 +4,10 @@ module.exports = function(app) {
     app.route('/api/contests')
         .post(contests.create)
         .get(contests.list);
-    app.route('/api/contests/:contestId')
-        .get(contests.read);
-
-    app.param('contestId', contests.contestByID);
-    
+    app.route('/api/contests/:year/:gender')
+        .get(contests.byYearAndGender);
+    app.param('year', contests.yearParam);
+    app.param('gender', contests.genderParam);
 };
 
 

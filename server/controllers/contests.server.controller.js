@@ -21,19 +21,35 @@ exports.list = function(req, res, next) {
     });
 };
 
-exports.read = function(req, res) {
-    res.json(req.contest);
-}
 
-exports.contestByID = function(req, res, next, id) {
-    Contest.findOne({
-        _id: id
-    }, (err, contest) => {
+exports.byYearAndGender = function(req, res, next){
+    console.log("---byYearAndGender");
+    let year = req.year;
+    let gender = req.gender;
+    let query = {
+        year: year,
+        gender: gender
+    }
+    console.log("from backend ");
+    console.log(query);
+    Contest.findOne(query, (err, contest) => {
+        console.log("from callback");
+        console.log(contest);
         if (err) {
             return next(err);
         } else {
-            req.contest = contest;
-            next();
+            res.status(200).json(contest);
         }
     });
 };
+
+
+exports.yearParam = function(req, res, next, year){
+    req.year = year;
+    next();
+}
+
+exports.genderParam = function(req, res, next, gender){
+    req.gender = gender;
+    next();
+}
