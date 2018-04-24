@@ -1,4 +1,4 @@
-<h1 class="year-gender"><span *ngIf="year">{{year}}</span> <span *ngIf="gender">{{gender}}'s Basketball</span></h1>
+  <h1 class="year-gender">{{year}} {{gender}}'s Basketball</h1>
   <div class="seed-row" *ngFor="let seed of teams; let i = index">
     <h2 class="seed-title">{{seedText[i]}}</h2>
     <table class="team-table">
@@ -8,7 +8,7 @@
             class="team"
             [class.selected]="showSelectedTeam(seed[j])"
             (click)="addTeamAndSend(seed[j], i)"
-        >{{ seed[1] }}</td>
+        >{{ seed[j] }}</td>
       </tr>
     </table>
   </div>
