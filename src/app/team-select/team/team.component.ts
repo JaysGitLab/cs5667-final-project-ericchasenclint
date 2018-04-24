@@ -19,7 +19,6 @@ export class TeamComponent {
   year = false;
   gender = false;
 
-  @Output() sendSelections = new EventEmitter<any>();
 
   constructor(
       private _router: Router,
@@ -28,16 +27,16 @@ export class TeamComponent {
   ) {}
 
   ngOnInit() {
-      this.paramsObserver = this._route.parent.params.subscribe(params => {
-          let contestId = params['contestId'];
-          console.log("contestId from TeamComponent: " + contestId);
+      this.paramsObserver = this._route.params.subscribe(params => {
+          let year = params['year'];
+          let gender = params['gender'];
+          this.loadContests(year, gender);
       });
-      this.loadContests("5add3d037ab5003ee77c7d4e");
   }
 
-  loadContests(contestId: string){
+  loadContests(year, gender){
      let regions = ["North", "South", "East", "West"];
-     this._contestService.read(contestId)
+     this._contestService.byYearAndGender(year, gender)
          .subscribe(
              contest => {
                  this.year = contest["year"];
@@ -51,16 +50,14 @@ export class TeamComponent {
                  this.teamsReady = true;
              },
              error => {
-                 console.log("from team.component: " + error);
                  this._router.navigate(['/']);
              }
          );
 
   }
 
-  addTeamAndSend(team, index) {
+  addTeam(team, index) {
     this.selection[index] = team;
-    this.sendSelections.emit(this.selection);
   }
 
   showSelectedTeam(team) {
@@ -68,5 +65,26 @@ export class TeamComponent {
       return t === team;
     });
     return t;
+  }
+
+  submitSelection() {
+      if (this.validSelection()){
+          alert("All teams are in!\nThat's a valid selection. \nWe need to store it in the db.");
+      } else {
+          alert("You must select one team for every seed");
+      }
+  }
+
+  validSelection(){
+      if (this.selection.length !== 16){
+          return false;
+      }
+      for (var i=0; i<16; i++){
+          if (!this.selection[i]){
+              return false;
+          }
+      }
+      return true;
+
   }
 }

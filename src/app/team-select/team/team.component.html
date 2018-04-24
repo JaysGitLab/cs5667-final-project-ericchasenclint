@@ -7,8 +7,9 @@
             *ngFor="let team of seed; let j = index"
             class="team"
             [class.selected]="showSelectedTeam(seed[j])"
-            (click)="addTeamAndSend(seed[j], i)"
+            (click)="addTeam(seed[j], i)"
         >{{ seed[j] }}</td>
       </tr>
     </table>
   </div>
+  <button class="btn" (click)="submitSelection()">Submit</button>

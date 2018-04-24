@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 
+import { TeamComponent } from './team/team.component';
 import { TeamSelectComponent } from './team.select.component';
 import { ContestSelectComponent } from './contestselect/contestselect.component';
 export const TeamSelectRoutes: Routes = [{
     path: 'entercontest',
-    component: ContestSelectComponent,
+    component: TeamSelectComponent,
     children: [
-        {path: ':contestId', component: TeamSelectComponent},
+        {path: '', component: ContestSelectComponent},
+        {path: ':year/:gender', component: TeamComponent},
     ],
 }];

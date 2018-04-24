@@ -31,6 +31,13 @@ export class ContestService {
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
+
+    byYearAndGender(year, gender): Observable<any> {
+        return this._http
+            .get(this._baseURL + "/" + year + "/" + gender)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
     
 
     private handleError(error: Response ) {

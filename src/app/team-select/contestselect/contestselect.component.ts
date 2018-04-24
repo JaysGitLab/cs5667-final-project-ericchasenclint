@@ -17,11 +17,9 @@ export class ContestSelectComponent{
     ) {}
 
     ngOnInit() {
-        console.log("Hello from ContestSelect");
         this._contestService.list()
           .subscribe(
              contests => {
-                 console.log("from contestselect.component: ")
                  console.log(contests);
 
                  this.currentContests = contests.slice();
@@ -34,6 +32,6 @@ export class ContestSelectComponent{
     }
 
     selectcontest(contest){
-        console.log("contest selected: " + contest._id);
+        this._router.navigate(['/entercontest', contest.year, contest.gender]);
     }
 }
