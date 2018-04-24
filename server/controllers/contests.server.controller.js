@@ -22,7 +22,6 @@ exports.list = function(req, res, next) {
 };
 
 exports.read = function(req, res) {
-    console.log("From contests.server.controller: " + req.contest);
     res.json(req.contest);
 }
 

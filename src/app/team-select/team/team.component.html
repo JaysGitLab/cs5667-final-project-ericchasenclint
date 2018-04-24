@@ -1,11 +1,14 @@
-<div class="seed-row" *ngFor="let seed of bracket; let i = index">
-  <h2 class="seed-title">{{seed[0]}}</h2>
-  <table class="team-table">
-    <tr class="team-row">
-      <td class="team" [class.selected]="showSelectedTeam(seed[1])" (click)="addTeamAndSend(seed[1], i)">{{ seed[1] }}</td>
-      <td class="team" [class.selected]="showSelectedTeam(seed[2])" (click)="addTeamAndSend(seed[2], i)">{{ seed[2] }}</td>
-      <td class="team" [class.selected]="showSelectedTeam(seed[3])" (click)="addTeamAndSend(seed[3], i)">{{ seed[3] }}</td>
-      <td class="team" [class.selected]="showSelectedTeam(seed[4])" (click)="addTeamAndSend(seed[4], i)">{{ seed[4] }}</td>
-    </tr>
-  </table>
-</div>
+<h1 class="year-gender"><span *ngIf="year">{{year}}</span> <span *ngIf="gender">{{gender}}'s Basketball</span></h1>
+  <div class="seed-row" *ngFor="let seed of teams; let i = index">
+    <h2 class="seed-title">{{seedText[i]}}</h2>
+    <table class="team-table">
+      <tr class="team-row">
+        <td
+            *ngFor="let team of seed; let j = index"
+            class="team"
+            [class.selected]="showSelectedTeam(seed[j])"
+            (click)="addTeamAndSend(seed[j], i)"
+        >{{ seed[1] }}</td>
+      </tr>
+    </table>
+  </div>

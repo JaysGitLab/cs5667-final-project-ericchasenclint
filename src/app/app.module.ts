@@ -52,6 +52,7 @@ import { TeamSelectModule } from './team-select/team.select.module';
 
 // Services
 import { AuthenticationService } from "./authentication/authentication.service";
+import { ContestService } from "./createcontest/createcontest.service";
 
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
@@ -110,7 +111,7 @@ type StoreType = {
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
-  providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService]
+  providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService, ContestService]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) { }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
