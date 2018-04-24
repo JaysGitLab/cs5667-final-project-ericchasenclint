@@ -23,18 +23,13 @@ exports.list = function(req, res, next) {
 
 
 exports.byYearAndGender = function(req, res, next){
-    console.log("---byYearAndGender");
     let year = req.year;
     let gender = req.gender;
     let query = {
         year: year,
         gender: gender
     }
-    console.log("from backend ");
-    console.log(query);
     Contest.findOne(query, (err, contest) => {
-        console.log("from callback");
-        console.log(contest);
         if (err) {
             return next(err);
         } else {

@@ -20,8 +20,6 @@ export class ContestSelectComponent{
         this._contestService.list()
           .subscribe(
              contests => {
-                 console.log(contests);
-
                  this.currentContests = contests.slice();
              },
              error => {
