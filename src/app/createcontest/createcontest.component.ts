@@ -55,9 +55,16 @@ export class CreateContestComponent implements OnInit{
         let out = {};
         out["year"] = this.contestform.get('year').value;
         out["gender"] = this.contestform.get('gender').value;
+        out["seeds"] = [];
         for (let seed of this.seeds){
+            let seedObj = {};
+            out["seeds"][seed] = seedObj;
             for (let region of this.regions ){
-                out[seed+region] = this.contestform.get(seed+region).get('teamFormCtrl').value;
+                let obj = {};
+                obj["name"] = this.contestform.get(seed+region).get('teamFormCtrl').value;
+                obj["wins"] = 0;
+                obj["stillIn"] = true;
+                seedObj[region] = obj;
             }
         }
         return out;
