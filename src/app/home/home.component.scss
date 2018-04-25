@@ -1,3 +1,5 @@
+/* Hero */
+
 .hero {
   display: grid;
   grid-template-columns: 33% 1fr;
@@ -5,7 +7,7 @@
   height: 450px;
   background-color: #fff;
   overflow: hidden;
-  background-image: url('../../assets/img/hero/test.png');
+  background-image: url('../../assets/img/hero/teambg.png');
   background-position: left;
   background-repeat: no-repeat;
   background-size: contain;
@@ -46,7 +48,7 @@
   box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
 }
 
-.item-b {
+.split-pictures {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: [first] 1fr [second] 1fr;
