@@ -33,12 +33,6 @@ import "hammerjs";
 import { ENV_PROVIDERS } from "./environment";
 import { ROUTES } from "./app.routes";
 
-// Components
-
-import { HomeComponent } from "./home";
-import { TeamComponent } from "./team-select/team";
-import { TeamSelectComponent } from "./team-select";
-
 // App is our top level component
 import { AppComponent } from "./app.component";
 import { APP_RESOLVER_PROVIDERS } from "./app.resolver";
@@ -47,6 +41,7 @@ import { AppState, InternalStateType } from "./app.service";
 // Modules
 
 import { HomeModule } from "./home/home.module";
+import { TeamSelectModule } from './team-select/team.select.module';
 import { NavBarModule } from './navbar/navbar.module';
 import { AuthenticationModule } from "./authentication/authentication.module";
 
@@ -76,8 +71,6 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    TeamSelectComponent,
-    TeamComponent,
     NoContentComponent
   ],
   /**
@@ -90,6 +83,7 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     HomeModule,
+    TeamSelectModule,
     NavBarModule,
     AuthenticationModule,
     HttpModule,
