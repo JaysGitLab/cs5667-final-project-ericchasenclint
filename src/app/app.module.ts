@@ -36,7 +36,6 @@ import { ROUTES } from "./app.routes";
 // Components
 
 import { HomeComponent } from "./home";
-import { ReactComponent } from "./react";
 import { TeamComponent } from "./team-select/team";
 import { TeamSelectComponent } from "./team-select";
 
@@ -77,7 +76,6 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    ReactComponent,
     TeamSelectComponent,
     TeamComponent,
     NoContentComponent

@@ -1,40 +1,224 @@
-/*styles for home content only*/
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
+.hero {
+  display: grid;
+  grid-template-columns: 33% 1fr;
+  grid-template-rows: [first] 3fr [second] 1fr [last] 1fr;
+  height: 450px;
+  background-color: #fff;
+  overflow: hidden;
+  background-image: url('../../assets/img/hero/test.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-mat-card {
-  max-width: 80%;
-  margin: 2em auto;
+.hero-title,
+.hero-subtitle,
+.primary-cta {
+  margin-left: 35px;
 }
 
-mat-toolbar-row {
-  justify-content: space-between;
+.hero-title {
+  grid-row: first;
+  color: #000;
+  font-size: 60px;
+  text-align: left;
+  align-self: center;
 }
 
-mat-grid-tile {
-  background: lightblue;
+.hero-subtitle {
+  align-self: center;
 }
 
-#home {
-  margin:0 auto;
-  display:flex;
-  flex-direction:row-reverse;
-}
-#daphne {
-  margin-top:5%;
+.primary-cta {
+  color: #fff;
+  background-color: #059eff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+  justify-self: start;
+  align-self: start;
+  transition: background-color 0.5s ease;
 }
 
-.done {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: white;
+.primary-cta:hover {
+  transform: translateY(-1px);
+  -webkit-box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
 }
-.banner-technologies-title {
-  color: #0f96ba;
-  font-weight: normal !important;
-  margin: 30px 0 30px 0;
-  display: inline-block;
+
+.item-b {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: [first] 1fr [second] 1fr;
+  grid-column-start: 2;
+  grid-row: first / span 3;
+  background-color: #059eff;
+  transform: rotate(8deg);
+  height: 135%;
+  width: 205%;
+}
+
+.hero-picture {
+  background-size: cover;
+  background-position: center;
+}
+
+.picture-one {
+  background-image: url('../../assets/img/hero/vill.png');
+}
+
+.picture-two {
+  background-image: url('../../assets/img/hero/erika.png');
+  grid-row: second;
+  background-position: top;
+}
+
+/* Generics */
+
+.standard-section {
+  padding: 75px 8% 75px 8%;
+}
+
+.standard-section .section-title {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  text-align: center;
+}
+
+.standard-section .section-title::after {
+  content: '';
+  background: #059eff;
+  height: 3px;
+  width: 125px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+}
+
+.standard-section .blue-title::after {
+  background: #FFF;
+}
+
+/* Hover Panel */
+
+.standard-panel {
+  background: #FFF;
+  border-radius: 3px;
+  padding: 20px 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+/* Rules Explanation Section */
+
+.explanation-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+}
+
+.explanation-section .section-title {
+  grid-column: 1 / span 2;
+}
+
+.explanation-left,
+.explanation-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explanation-right {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  align-items: start;
+}
+
+.explanation-right .panel-title {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.panel-title {
+  margin-bottom: 15px;
+}
+
+.panel-copy {
+  width: 420px;
+}
+
+.rules-cta {
+  margin-top: 1rem;
+}
+
+.number-image {
+  height: 72px;
+}
+
+.rules-copy {
+  margin-top: 5px;
+}
+
+.explanation-right .primary-cta {
+  margin-left: 0;
+  grid-column: 2;
+}
+
+.blue-section {
+  background: #059eff;
+  position: relative;
+  z-index: 1;
+}
+
+.blue-title {
+  color: #FFF;
+  text-align: center;
+}
+
+.get-started-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  padding: 50px 20px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.get-started-panel .primary-cta {
+  align-self: center;
+  margin-left: 0;
+}
+
+.entry-copy {
+  text-align: center;
+  width: 450px;
+}
+
+.get-started-cutout {
+  position: absolute;
+}
+
+.sister-jean {
+  transform: scale(0.8) rotate(12deg);
+  top: 25%;
+  left: 65%;
+}
+
+.divin {
+  position: absolute;
+  left: 15%;
+  transform: rotate(-12deg) scale(0.8);
+  top: 25%;
 }
