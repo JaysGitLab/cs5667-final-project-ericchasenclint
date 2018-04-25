@@ -43,6 +43,7 @@ import { AppState, InternalStateType } from "./app.service";
 import { HomeModule } from "./home/home.module";
 import { TeamSelectModule } from './team-select/team.select.module';
 import { NavBarModule } from './navbar/navbar.module';
+import { FooterModule } from './footer/footer.module';
 import { AuthenticationModule } from "./authentication/authentication.module";
 
 // Services
@@ -85,6 +86,7 @@ type StoreType = {
     HomeModule,
     TeamSelectModule,
     NavBarModule,
+    FooterModule,
     AuthenticationModule,
     HttpModule,
     HttpClientModule,
