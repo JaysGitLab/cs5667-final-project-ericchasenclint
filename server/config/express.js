@@ -71,7 +71,7 @@ module.exports = function(db) {
     var users = require('../routes/users.server.routes')(app);
     var articles = require('../routes/articles.server.routes')(app);
     var index = require('../routes/index.server.routes')(app);
-    
+    var contests = require('../routes/contests.server.routes')(app);
     
     // Load the Socket.io configuration
     configureSocket(server, io, mongoStore);

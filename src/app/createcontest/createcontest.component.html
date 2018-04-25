@@ -1,0 +1,31 @@
+<div>
+    <router-outlet></router-outlet>
+    <form class="createcontestform" [formGroup]='contestform'>
+        <mat-form-field class="yearfield">
+            <input matInput type="number" placeholder="Year" formControlName="year">
+        </mat-form-field>
+        <br>
+        <mat-radio-group formControlName="gender" [ngClass]="genderClass()">
+            <mat-radio-button value="Women">Women</mat-radio-button>
+            <mat-radio-button value="Men">Men</mat-radio-button>
+        </mat-radio-group>
+        <table>
+            <!--<tr>
+                <td></td>
+                <th *ngFor="let region of regions">{{region}}</th>
+            </tr>-->
+            <tr *ngFor="let seed of seeds">
+                <!--<th>{{seed}}</th>-->
+                <td *ngFor="let region of regions">
+                  <team-dropdown
+                        [region]="region"
+                        [seed]="seed"
+                        [contestFormGroup]="contestform"
+                  ></team-dropdown>
+                <td>
+            </tr>
+        </table>
+        <p *ngIf="showInvalidWarning">You need to complete the form before submitting</p>
+        <button mat-raised-button (click)="onSubmit()">Submit</button>
+    </form>
+</div>

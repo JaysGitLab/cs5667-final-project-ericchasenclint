@@ -7,6 +7,7 @@ module.exports = function() {
 
     require('../models/user.server.model');
     require('../models/article.server.model');
+    require('../models/contest.server.model');
 
     return db;
 };
