@@ -2,9 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-
-import { HomeRoutes } from "./home.routes";
-import { HomeComponent } from "./home.component";
+import { FooterComponent } from "./footer.component";
 
 import {
     MatToolbarModule,
@@ -26,10 +24,9 @@ import {
         MatGridListModule,
         MatInputModule,
         MatButtonModule,
-        MatExpansionModule,
-        RouterModule.forChild(HomeRoutes)
+        MatExpansionModule
     ],
-    exports: [HomeComponent],
-    declarations: [HomeComponent]
+    exports: [FooterComponent],
+    declarations: [FooterComponent]
 })
-export class HomeModule { }
+export class FooterModule { }

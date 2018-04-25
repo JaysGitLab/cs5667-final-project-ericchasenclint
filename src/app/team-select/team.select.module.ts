@@ -3,8 +3,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
-import { HomeRoutes } from "./home.routes";
-import { HomeComponent } from "./home.component";
+import { TeamSelectComponent } from "./team.select.component";
+import { TeamComponent } from './team/team.component';
 
 import {
     MatToolbarModule,
@@ -26,10 +26,9 @@ import {
         MatGridListModule,
         MatInputModule,
         MatButtonModule,
-        MatExpansionModule,
-        RouterModule.forChild(HomeRoutes)
+        MatExpansionModule
     ],
-    exports: [HomeComponent],
-    declarations: [HomeComponent]
+    exports: [TeamSelectComponent],
+    declarations: [TeamSelectComponent, TeamComponent]
 })
-export class HomeModule { }
+export class TeamSelectModule { }
