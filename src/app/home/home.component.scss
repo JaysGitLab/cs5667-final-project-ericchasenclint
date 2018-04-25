@@ -222,3 +222,20 @@
   transform: rotate(-12deg) scale(0.8);
   top: 25%;
 }
+
+.questions-copy {
+  text-align: center;
+  width: 420px;
+  color: #FFF;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.questions-link {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.questions-link:hover {
+  color: #484848;
+}
