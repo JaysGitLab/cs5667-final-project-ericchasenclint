@@ -37,7 +37,8 @@ import { ROUTES } from "./app.routes";
 
 import { HomeComponent } from "./home";
 import { NavBarComponent } from "./navbar";
-import { ReactComponent } from "./react";
+import { TeamComponent } from "./team-select/team";
+import { TeamSelectComponent } from "./team-select";
 
 // App is our top level component
 import { AppComponent } from "./app.component";
@@ -81,7 +82,8 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    ReactComponent,
+    TeamSelectComponent,
+    TeamComponent,
     NoContentComponent
   ],
   /**

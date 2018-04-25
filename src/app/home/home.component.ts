@@ -4,11 +4,10 @@ import { LocalStorage } from 'ngx-store';
 
 
 @Component({
-  selector: 'home',  // <home></home>
-  styleUrls: [ './home.component.scss' ],
-  templateUrl: './home.component.html'
+    selector: "home",
+    styleUrls: ['./home.component.scss'],
+    templateUrl: "./home.component.html"
 })
-
 
 export class HomeComponent {
     @LocalStorage('user') user: any;
