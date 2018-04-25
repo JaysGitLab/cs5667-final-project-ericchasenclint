@@ -39,15 +39,24 @@ export class TeamComponent {
      this._contestService.byYearAndGender(year, gender)
          .subscribe(
              contest => {
+                 console.log(contest);
                  this.year = contest["year"];
                  this.gender = contest["gender"];
-                 for (var seed = 0; seed<16; seed++){
-                     this.teams[seed] = [];
+                 for (var seed = 1; seed<=16; seed++){
+                     this.teams[seed-1] = [];
                      for (var regionIdx = 0; regionIdx < 4; regionIdx++){
-                        this.teams[seed][regionIdx] = contest[(seed+1)+regions[regionIdx]];
+                        let region = regions[regionIdx];
+                        let team = {
+                            seed: seed,
+                            region: region
+                        }
+                        this.teams[seed-1][regionIdx] = team;
+                        team["name"] = contest
+                            .seeds[seed][regions[regionIdx]].name;
                      }
                  }
                  this.teamsReady = true;
+                 console.log
              },
              error => {
                  this._router.navigate(['/']);
@@ -68,6 +77,7 @@ export class TeamComponent {
   }
 
   submitSelection() {
+      console.log(this.selection);
       if (this.validSelection()){
           alert("All teams are in!\nThat's a valid selection. \nWe need to store it in the db.");
       } else {
