@@ -1,9 +1,9 @@
 <div *ngIf="teamsReady" class="updatebracket-container">
     <h1>Final Four</h1>
-    <app-bracket [bracket]="bracket" [displayUntil]=4 [top]="true"></app-bracket>
+    <app-bracket [showName]='true' [bracket]="bracket" [displayUntil]=4 [top]="true"></app-bracket>
     <div *ngFor="let region of regions">
         <h1>{{region.name}}</h1>
-        <app-bracket [bracket]="region.bracket" [displayUntil]=64 [top]="true"></app-bracket>
+        <app-bracket [showName]='false' [bracket]="region.bracket" [displayUntil]=64 [top]="true"></app-bracket>
     </div>
     <button mat-raised-button (click)="onSubmit()">Submit</button>
 </div>

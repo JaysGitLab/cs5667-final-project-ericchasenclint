@@ -14,7 +14,7 @@ import { ContestService } from '../createcontest/createcontest.service';
 export class UpdateBracketComponent implements OnInit{
     teamsReady = false;
     bracket: Bracket;
-    regions: any[] = ["South", "East", "West", "North"];
+    regions: any[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
     year: number;
     gender: string;
@@ -74,7 +74,6 @@ export class UpdateBracketComponent implements OnInit{
 
   }
   loadContests(year, gender){
-     let regions = ["North", "South", "East", "West"];
      this._contestService.byYearAndGender(year, gender)
          .subscribe(contest => this.onContestLoaded(contest),
              error => {

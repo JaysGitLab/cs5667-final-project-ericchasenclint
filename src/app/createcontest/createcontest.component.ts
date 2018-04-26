@@ -5,8 +5,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
-import { ContestInfo } from './contestinfo'
-
 @Component({
     selector: 'createcontest',
     templateUrl: './createcontest.component.html',
@@ -14,12 +12,11 @@ import { ContestInfo } from './contestinfo'
     providers: [ContestService]
 })
 export class CreateContestComponent implements OnInit{
-    regions: string[] = ["North", "South", "East", "West"];
+    regions: string[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     showInvalidWarning = false;
 
     errorMessage: string;
-    contestinfo : ContestInfo = new ContestInfo();
 
     contestform: FormGroup;
 

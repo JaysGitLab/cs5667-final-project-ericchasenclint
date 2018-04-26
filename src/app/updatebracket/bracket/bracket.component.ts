@@ -9,6 +9,7 @@ export class BracketComponent implements OnInit {
   @Input() bracket;
   @Input() displayUntil;
   @Input() top;
+  @Input() showName;
 
   constructor() { 
   }
