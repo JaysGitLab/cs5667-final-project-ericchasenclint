@@ -5,12 +5,14 @@ export class Bracket {
     up: Bracket;
     descendents: Bracket[];
     impossible = false;
+    level: number;
     constructor(up: Bracket, teamNames: string[], level: number){
         this.up = up;
+        this.level = level;
         if(this.up == null){
             this.descendents = [];
         }
-        if (level >  8) {
+        if (level >  32) {
             this.name = teamNames.shift();
             this.addDescendent(this);
         } else {

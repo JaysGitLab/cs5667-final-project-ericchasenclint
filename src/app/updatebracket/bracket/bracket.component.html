@@ -1,11 +1,16 @@
 <div class="container">
-    <div class="parents" *ngIf="bracket.a">
-        <app-bracket class="bracket-above" [bracket]="bracket.a"></app-bracket>
-        <app-bracket class="bracket-below" [bracket]="bracket.b"></app-bracket>
+    <div class="parents" *ngIf="bracket.a && bracket.level!=displayUntil">
+        <app-bracket class="bracket-above"
+            [bracket]="bracket.a"
+            [displayUntil]=displayUntil></app-bracket>
+        <app-bracket class="bracket-below"
+            [bracket]="bracket.b"
+            [displayUntil]=displayUntil></app-bracket>
     </div>
-    <div class="team-name" (click)="onSelect(bracket.name)"
+    <div class="team-name " (click)="onSelect(bracket.name)"
          [class.selected]="bracket.name !='???' && bracket.up && bracket.name == bracket.up.name"
-         [class.impossible]="bracket.impossible">
-    {{bracket.name}}
+         [class.impossible]="bracket.impossible"
+         [ngClass]="{'top':top}">
+    {{bracket.level}} {{bracket.name}}
     </div>
 </div>

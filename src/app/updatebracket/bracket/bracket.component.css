@@ -13,8 +13,8 @@
     border: 1px solid black;
 }
 .parents{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     position: relative;
     display: inline-block;
 }
@@ -32,4 +32,8 @@
 .impossible{
     color: red;
 }
-
+.top{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

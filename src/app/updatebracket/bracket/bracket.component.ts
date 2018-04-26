@@ -7,6 +7,8 @@ import { Bracket } from '../bracket';
 })
 export class BracketComponent implements OnInit {
   @Input() bracket;
+  @Input() displayUntil;
+  @Input() top;
 
   constructor() { 
   }
