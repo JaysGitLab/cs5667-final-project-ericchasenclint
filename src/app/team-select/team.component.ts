@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ContestService } from "../../createcontest/createcontest.service";
+import { ContestService } from "../createcontest/createcontest.service";
 
 import { seedText } from "./data/data";
 
