@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 
-import { ContestService } from "../../createcontest/createcontest.service";
+import { ContestService } from "../createcontest/createcontest.service";
 
 @Component({
     selector: "contestselect",
@@ -30,6 +30,6 @@ export class ContestSelectComponent{
     }
 
     selectcontest(contest){
-        this._router.navigate(['/entercontest', contest.year, contest.gender]);
+        this._router.navigate([this._router.url, contest.year, contest.gender]);
     }
 }

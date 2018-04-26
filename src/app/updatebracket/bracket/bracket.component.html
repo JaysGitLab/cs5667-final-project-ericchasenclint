@@ -11,6 +11,7 @@
          [class.selected]="bracket.name !='???' && bracket.up && bracket.name == bracket.up.name"
          [class.impossible]="bracket.impossible"
          [ngClass]="{'top':top}">
-    {{bracket.level}} {{bracket.name}}
+    {{bracket.name}}
+        <span *ngIf="bracket.level!=64 && bracket.name !='???'" class="x-button" (click)="clear()">&otimes;</span>
     </div>
 </div>

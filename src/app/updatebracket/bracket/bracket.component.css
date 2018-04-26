@@ -30,10 +30,16 @@
     background-color: #ccc;
 }
 .impossible{
-    color: red;
+    background-color: red;
 }
 .top{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+.x-button{
+    color: red;
+}
+.impossible .x-button{
+    color: black;
 }

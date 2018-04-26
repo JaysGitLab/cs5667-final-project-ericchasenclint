@@ -20,4 +20,8 @@ export class BracketComponent implements OnInit {
   onSelect(name: string){
       this.bracket.up.setName(name);
   }
+
+  clear(){
+      this.bracket.setName("???");
+  }
 }

@@ -3,6 +3,6 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "team-select", // <team-select></team-select>,
   styleUrls: ["./team.select.component.scss"],
-  templateUrl: "./team.select.component.html"
+  template: '<div class="select-team-container"><router-outlet></router-outlet></div>'
 })
 export class TeamSelectComponent { }

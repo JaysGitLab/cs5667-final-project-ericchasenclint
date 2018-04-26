@@ -3,30 +3,32 @@ export class Bracket {
     a: Bracket;
     b: Bracket;
     up: Bracket;
-    descendents: Bracket[];
+    positions: Bracket[];
     impossible = false;
     level: number;
-    constructor(up: Bracket, teamNames: string[], level: number){
+    constructor(up: Bracket, positionNames: string[], level: number){
         this.up = up;
         this.level = level;
         if(this.up == null){
-            this.descendents = [];
+            this.positions= [];
         }
-        if (level >  32) {
-            this.name = teamNames.shift();
-            this.addDescendent(this);
+        if (level ===  64) {
+            this.name = positionNames.shift();
         } else {
             this.name = "???";
-            this.a = new Bracket(this, teamNames, level * 2);
-            this.b = new Bracket(this, teamNames, level * 2);
+            this.a = new Bracket(this, positionNames, level * 2);
+            this.b = new Bracket(this, positionNames, level * 2);
         }
+        this.register(this);
     }
     setName(name: string){
         this.name = name;
         this.validate();
     }
     validate(){
-        if(this.a){
+        if(this.name=='???'){
+            this.impossible = false;
+        }else if(this.a){
             this.impossible = this.name != this.a.name
             && this.name != this.b.name;
         }
@@ -34,11 +36,11 @@ export class Bracket {
             this.up.validate();
         }
     }
-    addDescendent(descendent: Bracket){
+    register(position: Bracket){
         if(this.up != null){
-            this.up.addDescendent(descendent);
+            this.up.register(position);
         }else{
-            this.descendents.push(descendent);
+            this.positions.push(position);
         }
     }
 }

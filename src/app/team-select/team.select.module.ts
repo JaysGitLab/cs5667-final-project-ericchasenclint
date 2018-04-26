@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TeamSelectRoutes } from './team.select.routes.ts';
 import { TeamComponent } from "./team/team.component.ts";
 import { TeamSelectComponent } from "./team.select.component.ts";
-import { ContestSelectComponent } from "./contestselect/contestselect.component";
+import { ContestSelectComponent } from "../contestselect/contestselect.component";
 
 import {
     MatButtonModule,

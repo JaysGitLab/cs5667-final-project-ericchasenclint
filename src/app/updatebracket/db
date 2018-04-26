@@ -47,11 +47,10 @@ export class UpdateBracketComponent implements OnInit{
     }
 
     onSubmit(){
-        if (this.isValid()){
+        if (isValid()){
 
         }else{
             alert("Somewhere you've got an impossible configuration. It will have a red background");
-        }
-    }
+        
 }
 
