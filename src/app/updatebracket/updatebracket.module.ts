@@ -3,8 +3,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule }   from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { UpdateBracketRoutes } from './createcontest.routes';
-import { UpdateBracketComponent} from './createcontest.component';
+import { UpdateBracketRoutes } from './updatebracket.routes';
+import { UpdateBracketComponent} from './updatebracket.component';
 
 import {
   MatButtonModule,
