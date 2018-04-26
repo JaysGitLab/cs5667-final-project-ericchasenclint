@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./home";
 import { NoContentComponent } from "./no-content";
 import { TeamSelectComponent } from "./team-select";
+import { StandingsComponent } from './standings';
 
 import { DataResolver } from "./app.resolver";
 

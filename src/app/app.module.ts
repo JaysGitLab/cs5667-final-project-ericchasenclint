@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule, RequestOptions } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
+
 import {
   LocationStrategy,
   HashLocationStrategy,
@@ -44,8 +44,10 @@ import { HomeModule } from "./home/home.module";
 import { TeamSelectModule } from './team-select/team.select.module';
 import { NavBarModule } from './navbar/navbar.module';
 import { FooterModule } from './footer/footer.module';
+import { StandingsModule } from './standings/standings.module';
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { CreateContestModule } from './createcontest/createcontest.module';
+import { TournamentSetupModule } from './tournamentSetup/tournamentSetup.module'
 
 
 // Services
@@ -53,7 +55,7 @@ import { AuthenticationService } from "./authentication/authentication.service";
 
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+//import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import "../styles/styles.scss";
 import "../styles/headings.css";
@@ -80,7 +82,7 @@ type StoreType = {
    * Import Angular's modules.
    */
   imports: [
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     CommonModule,
     BrowserModule,
     FormsModule,
@@ -89,9 +91,10 @@ type StoreType = {
     TeamSelectModule,
     NavBarModule,
     FooterModule,
+    StandingsModule,
+    TournamentSetupModule,
     AuthenticationModule,
     CreateContestModule,
-    HttpModule,
     HttpClientModule,
     MatToolbarModule,
     MatCardModule,

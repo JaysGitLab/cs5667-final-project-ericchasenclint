@@ -1,5 +1,5 @@
 /**
- * @author: @AngularClass
+ * @author: tipe.io
  */
 
 require('ts-node/register');
@@ -17,23 +17,23 @@ exports.config = {
   ],
   exclude: [],
 
-  framework: 'jasmine2',
+  framework: 'jasmine',
 
-  allScriptsTimeout: 110000,
+  allScriptsTimeout: 11000,
 
   jasmineNodeOpts: {
     showTiming: true,
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    defaultTimeoutInterval: 400000
+    defaultTimeoutInterval: 40000
   },
-  directConnect: true,
 
+  directConnect: true,
   capabilities: {
-    'browserName': 'chrome',
-    'chromeOptions': {
-      'args': ['show-fps-counter=true']
+    browserName: 'chrome',
+    chromeOptions: {
+      args: [ "--headless", "--disable-gpu", "--window-size=800x600", "--no-sandbox" ]
     }
   },
 

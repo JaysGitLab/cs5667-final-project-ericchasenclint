@@ -1,7 +1,7 @@
 import 'rxjs/Rx';
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthenticationService {
@@ -9,10 +9,10 @@ export class AuthenticationService {
 
     private _signinURL = 'api/auth/signin';
     private _signupURL = 'api/auth/signup';
-    
-    constructor (private http: Http) {
+
+    constructor(private http: HttpClient) {
     }
-    
+
     isLoggedIn(): boolean {
         return (!!this.user);
     }
@@ -20,25 +20,19 @@ export class AuthenticationService {
     signin(credentials: any): Observable<any> {
         let body = JSON.stringify(credentials);
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this._signinURL, body, options)
-        .map(res => this.user = res.json())
-        .catch(this.handleError)
+        return this.http.post(this._signinURL, body);
     }
 
-     signup(user: any): Observable<any> {
+    signup(user: any): Observable<any> {
         let body = JSON.stringify(user);
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this._signupURL, body, options)
-        .map(res => this.user = res.json())
-        .catch(this.handleError)
+        return this.http.post(this._signupURL, body);
     }
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().message || 'Server error');
+        return Observable.throw(error || 'Server error');
     }
 }   
