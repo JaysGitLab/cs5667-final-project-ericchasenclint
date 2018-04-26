@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
@@ -55,9 +54,16 @@ export class CreateContestComponent implements OnInit{
         let out = {};
         out["year"] = this.contestform.get('year').value;
         out["gender"] = this.contestform.get('gender').value;
+        out["seeds"] = [];
         for (let seed of this.seeds){
+            let seedObj = {};
+            out["seeds"][seed] = seedObj;
             for (let region of this.regions ){
-                out[seed+region] = this.contestform.get(seed+region).get('teamFormCtrl').value;
+                let obj = {};
+                obj["name"] = this.contestform.get(seed+region).get('teamFormCtrl').value;
+                obj["wins"] = 0;
+                obj["stillIn"] = true;
+                seedObj[region] = obj;
             }
         }
         return out;
@@ -68,8 +74,6 @@ export class CreateContestComponent implements OnInit{
             let contest = this.prepareSaveContest();
             this._contestService
                 .create(contest)
-//                .subscribe(createdContest => this._router.navigate(['/select', createdContest._id]),
-//                        error => this.errorMessage = error);
                 .subscribe(createdContest => this._router.navigate(['/']),
                         error => this.errorMessage = error);
         } else {
@@ -87,4 +91,23 @@ export class CreateContestComponent implements OnInit{
             }
         }
     }
+
+    yeargenderchange() {
+        let year = this.contestform.get('year').value;
+        let gender = this.contestform.get('gender').value;
+        let overwritewarning = "A " + year + " " + gender + "'s contest "
+            + "already exists.\n\nIf you submit a new one, it will "
+            + "overwrite the old one.\n\nProceed with caution.";
+        if (year && gender) {
+            this._contestService
+                .byYearAndGender(year, gender)
+                .subscribe(oldContest => {
+                    if(oldContest){
+                        alert(overwritewarning);
+                    }
+                },
+                error =>{})
+        }
+    }
 }
+

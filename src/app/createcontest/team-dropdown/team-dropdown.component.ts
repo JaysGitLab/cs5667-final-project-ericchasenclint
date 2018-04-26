@@ -33,9 +33,11 @@ export class TeamDropdownComponent {
   teamCtrlGroup: FormGroup;
   teamCtrl: FormControl;
   filteredTeams: Observable<any[]>;
+
+
   static buildFormGroup() {
     return new FormGroup({
-        teamFormCtrl: new FormControl("", [Validators.required,
+        teamFormCtrl: new FormControl(Teams.randomTeam().name, [Validators.required,
                                    TeamValidator.knownTeamValidator()])
     });
   }
@@ -81,6 +83,10 @@ export class TeamDropdownComponent {
 }
 
 class Teams {
+  static randomTeam(): any{
+      return Teams.teams[Math.floor(Math.random() * Teams.teams.length)]
+  }
+
   static teams: any[] = [
     {"detail": "Abilene Christian Wildcats", "short": "ABIL", "name": "Abilene Christian"},
     {"detail": "Air Force Falcons", "short": "AF", "name": "Air Force"},

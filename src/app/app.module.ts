@@ -37,8 +37,6 @@ import { ROUTES } from "./app.routes";
 
 import { HomeComponent } from "./home";
 import { ReactComponent } from "./react";
-import { TeamComponent } from "./team-select/team";
-import { TeamSelectComponent } from "./team-select";
 
 // App is our top level component
 import { AppComponent } from "./app.component";
@@ -50,9 +48,11 @@ import { HomeModule } from './home/home.module';
 import { NavBarModule } from './navbar/navbar.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CreateContestModule } from './createcontest/createcontest.module';
+import { TeamSelectModule } from './team-select/team.select.module';
 
 // Services
 import { AuthenticationService } from "./authentication/authentication.service";
+import { ContestService } from "./createcontest/createcontest.service";
 
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
@@ -78,8 +78,6 @@ type StoreType = {
   declarations: [
     AppComponent,
     ReactComponent,
-    TeamSelectComponent,
-    TeamComponent,
     NoContentComponent
   ],
   /**
@@ -95,6 +93,7 @@ type StoreType = {
     NavBarModule,
     AuthenticationModule,
     CreateContestModule,
+    TeamSelectModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,
@@ -112,7 +111,7 @@ type StoreType = {
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
-  providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService]
+  providers: [ENV_PROVIDERS, APP_PROVIDERS, AuthenticationService, ContestService]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) { }

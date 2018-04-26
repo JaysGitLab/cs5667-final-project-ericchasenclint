@@ -2,10 +2,10 @@
     <router-outlet></router-outlet>
     <form class="createcontestform" [formGroup]='contestform'>
         <mat-form-field class="yearfield">
-            <input matInput type="number" placeholder="Year" formControlName="year">
+            <input matInput type="number" placeholder="Year" formControlName="year" (change)="yeargenderchange()">
         </mat-form-field>
         <br>
-        <mat-radio-group formControlName="gender" [ngClass]="genderClass()">
+        <mat-radio-group formControlName="gender" [ngClass]="genderClass()" (change)="yeargenderchange()">
             <mat-radio-button value="Women">Women</mat-radio-button>
             <mat-radio-button value="Men">Men</mat-radio-button>
         </mat-radio-group>

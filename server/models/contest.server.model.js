@@ -1,73 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const Team = new Schema({
+    name: String,
+    wins: Number,
+    stillIn: Boolean
+});
+
+const Seed = new Schema({
+    North: Team,
+    South: Team,
+    East: Team,
+    West: Team
+});
+
 const ContestSchema = new Schema({
     year: {type: Number, min: 2000, max: 3000},
     gender: {type: String, enum: ["Women", "Men"]},
-    "1North": String,
-    "1South": String,
-    "1East": String,
-    "1West": String,
-    "2North": String,
-    "2South": String,
-    "2East": String,
-    "2West": String,
-    "3North": String,
-    "3South": String,
-    "3East": String,
-    "3West": String,
-    "4North": String,
-    "4South": String,
-    "4East": String,
-    "4West": String,
-    "5North": String,
-    "5South": String,
-    "5East": String,
-    "5West": String,
-    "6North": String,
-    "6South": String,
-    "6East": String,
-    "6West": String,
-    "7North": String,
-    "7South": String,
-    "7East": String,
-    "7West": String,
-    "8North": String,
-    "8South": String,
-    "8East": String,
-    "8West": String,
-    "9North": String,
-    "9South": String,
-    "9East": String,
-    "9West": String,
-    "10North": String,
-    "10South": String,
-    "10East": String,
-    "10West": String,
-    "11North": String,
-    "11South": String,
-    "11East": String,
-    "11West": String,
-    "12North": String,
-    "12South": String,
-    "12East": String,
-    "12West": String,
-    "13North": String,
-    "13South": String,
-    "13East": String,
-    "13West": String,
-    "14North": String,
-    "14South": String,
-    "14East": String,
-    "14West": String,
-    "15North": String,
-    "15South": String,
-    "15East": String,
-    "15West": String,
-    "16North": String,
-    "16South": String,
-    "16East": String,
-    "16West": String,
+    seeds: [Seed]
 });
 
 mongoose.model('Contest', ContestSchema);

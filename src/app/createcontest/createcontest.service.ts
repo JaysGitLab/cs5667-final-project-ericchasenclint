@@ -13,14 +13,27 @@ export class ContestService {
 
     create(contest: any): Observable<any>{
         let body = JSON.stringify(contest);
-        console.log("from createcontest.server: " + body);
         return this._http.post(this._baseURL, contest)
             .map((res : Response)  => res.json())
             .catch(this.handleError);
     }
+    list(): Observable<any> {
+        return this._http
+            .get(`${this._baseURL}`)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+    
     read(contestId: string): Observable<any> {
         return this._http
             .get(`${this._baseURL}/${contestId}`)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    byYearAndGender(year, gender): Observable<any> {
+        return this._http
+            .get(this._baseURL + "/" + year + "/" + gender)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
