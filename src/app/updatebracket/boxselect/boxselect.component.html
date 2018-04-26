@@ -1,6 +1,0 @@
-<div class="boxselect">
-    <div class="team" *ngFor="let team of bracket.descendents" (click)="onSelect(team)"
-         [class.selected]="team.up && team.name == team.up.name">
-        <span>{{team.name}}</span>
-    </div>
-</div>
