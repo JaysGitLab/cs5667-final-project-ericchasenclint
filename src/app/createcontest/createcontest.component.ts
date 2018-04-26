@@ -74,8 +74,6 @@ export class CreateContestComponent implements OnInit{
             let contest = this.prepareSaveContest();
             this._contestService
                 .create(contest)
-//                .subscribe(createdContest => this._router.navigate(['/select', createdContest._id]),
-//                        error => this.errorMessage = error);
                 .subscribe(createdContest => this._router.navigate(['/']),
                         error => this.errorMessage = error);
         } else {
@@ -93,4 +91,23 @@ export class CreateContestComponent implements OnInit{
             }
         }
     }
+
+    yeargenderchange() {
+        let year = this.contestform.get('year').value;
+        let gender = this.contestform.get('gender').value;
+        let overwritewarning = "A " + year + " " + gender + "'s contest "
+            + "already exists.\n\nIf you submit a new one, it will "
+            + "overwrite the old one.\n\nProceed with caution.";
+        if (year && gender) {
+            this._contestService
+                .byYearAndGender(year, gender)
+                .subscribe(oldContest => {
+                    if(oldContest){
+                        alert(overwritewarning);
+                    }
+                },
+                error =>{})
+        }
+    }
 }
+

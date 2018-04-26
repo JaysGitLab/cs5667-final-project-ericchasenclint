@@ -13,7 +13,6 @@ export class ContestService {
 
     create(contest: any): Observable<any>{
         let body = JSON.stringify(contest);
-        console.log("from createcontest.server: " + body);
         return this._http.post(this._baseURL, contest)
             .map((res : Response)  => res.json())
             .catch(this.handleError);
