@@ -1,20 +1,30 @@
+.container{
+    position: relative;
+    margin: 0;
+}
 .team-name{
-    width: 40px;
-    position: relative`;
+    width: 150px;
     display: inline-block;
-    right: 0px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    text-align: right;
     vertical-align: top;
+    border: 1px solid black;
 }
 .parents{
-    padding-left: 10px;
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
-    right: 40px;
-    left: 0px;
     display: inline-block;
-    margin-bottom: 5px;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+}
+.bracket-above > * > .team-name{
+    vertical-align: bottom;
+    border-bottom: 0;
+}
+
+.bracket-below > * > .team-name{
+    border-top: 0;
 }
 .selected{
     background-color: #ccc;

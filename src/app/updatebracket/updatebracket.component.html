@@ -1,7 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<div *ngFor="let region of regions">
+    <h1>{{region.name}}</h1>
+    <app-bracket [bracket]="region.bracket"></app-bracket>
 </div>
-<app-bracket [bracket]="bracket"></app-bracket>

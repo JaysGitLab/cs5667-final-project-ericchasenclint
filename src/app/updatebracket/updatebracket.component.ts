@@ -12,19 +12,24 @@ import { ContestService } from '../createcontest/createcontest.service';
     providers: [ContestService]
 })
 export class UpdateBracketComponent implements OnInit{
-    regions: string[] = ["North", "South", "East", "West"];
-    seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-
-    teamNames = ['a','b','c','d','e','f',
-      'g','h','i','j','k','l','m','n','o',
-      'p','q','r','s','t'];
-    bracket = new Bracket(null, this.teamNames, 1);
+    regions: any[] = ["South", "East", "West", "Midwest"];
+    seeds: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 
     constructor (private _router: Router,
         private _contestService: ContestService) {
     }
 
     ngOnInit() {
+        for (let i=0; i<4; i++){
+            let teams = [];
+            for (let j=0; j<16; j++){
+                teams.push(this.seeds[j] + this.regions[i]);
+            }
+            this.regions[i] = {
+                name: this.regions[i],
+                bracket: new Bracket(null, teams, 1);
+            };
+        }
 
     }
 

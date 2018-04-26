@@ -13,12 +13,11 @@ export class Bracket {
         if (level >  8) {
             this.name = teamNames.shift();
             this.addDescendent(this);
-            return;
         } else {
             this.name = "???";
+            this.a = new Bracket(this, teamNames, level * 2);
+            this.b = new Bracket(this, teamNames, level * 2);
         }
-        this.a = new Bracket(this, teamNames, level * 2);
-        this.b = new Bracket(this, teamNames, level * 2);
     }
     setName(name: string){
         this.name = name;
