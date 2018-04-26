@@ -35,7 +35,7 @@ export class TeamComponent {
   }
 
   loadContests(year, gender){
-     let regions = ["North", "South", "East", "West"];
+     let regions = ["South", "East", "West", "Midwest"];
      this._contestService.byYearAndGender(year, gender)
          .subscribe(
              contest => {
