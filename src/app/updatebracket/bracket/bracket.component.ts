@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Bracket } from '../bracket';
+import { Bracket, Team } from '../bracket';
 @Component({
   selector: 'app-bracket',
   templateUrl: './bracket.component.html',
@@ -17,11 +17,11 @@ export class BracketComponent implements OnInit {
 
   }
 
-  onSelect(name: string){
-      this.bracket.up.setName(name);
+  onSelect(team: Team){
+      this.bracket.up.setTeam(team);
   }
 
   clear(){
-      this.bracket.setName("???");
+      this.bracket.setTeam(Team.nullTeam);
   }
 }
