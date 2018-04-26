@@ -1,13 +1,10 @@
 <div>
     <router-outlet></router-outlet>
     <form class="createcontestform" [formGroup]='contestform'>
-        <mat-form-field class="yearfield">
-            <input matInput type="number" placeholder="Year" formControlName="year" (change)="yeargenderchange()">
-        </mat-form-field>
         <div class="row">
 					<div class="col-md-2">
 						<mat-form-field class="yearfield">
-							<input matInput type="number" placeholder="Year" formControlName="year">
+							<input matInput type="number" placeholder="Year" formControlName="year" (change)="yeargenderchange()">
 						</mat-form-field>
 					</div>
 					<div class="col-md-10">	
