@@ -13,11 +13,13 @@ import { ContestService } from '../createcontest/createcontest.service';
 })
 export class UpdateBracketComponent implements OnInit{
     teamsReady = false;
+    the64: Bracket[] = [];
     bracket: Bracket;
     regions: any[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
     year: number;
     gender: string;
+    errorMessage: string;
 
     constructor(
         private _router: Router,
@@ -35,8 +37,8 @@ export class UpdateBracketComponent implements OnInit{
     }
 
     isValid(){
-        for (let position of this.bracket.positions){
-            if (position.impossible){
+        for (let node of this.bracket.subtree){
+            if (node.impossible){
                 return false;
             }
         }
@@ -44,11 +46,42 @@ export class UpdateBracketComponent implements OnInit{
     }
 
     onSubmit(){
-        if (this.isValid()){
-
-        }else{
+        if (!this.isValid()){
             alert("Somewhere you've got an impossible configuration. It will have a red background");
+            return;
         }
+        let contest = {
+            year: this.year,
+            gender: this.gender,
+            seeds: []
+        }
+        for (let i = 1; i <= 16; i++){
+            contest.seeds[i] = {};
+        }
+        for (let node of this.the64){
+            let team: Team = node.team;
+            team.wins = 0;
+            while(node.up && node.up.team === team){
+                node = node.up;
+                team.wins++;
+            }
+            if(node.up && node.up.team != Team.nullTeam){
+                team.stillIn = false;
+            }
+            contest.seeds[team.seed][team.region] = {
+                name: team.name,
+                wins: team.wins,
+                stillIn: team.stillIn
+            }
+        }
+        console.log(contest);
+        this._contestService.create(contest).subscribe(
+            createdContest => this._router.navigate(['/']),
+                error => {
+                    this.errorMessage = error;
+                    console.log(this.errorMessage);
+                }
+            );
     }
 
   onContestLoaded(contest){
@@ -58,13 +91,21 @@ export class UpdateBracketComponent implements OnInit{
         let teams: Team[] = [];
         for (let i=0; i<4; i++){
             for (let j=0; j<16; j++){
-                let team = new Team("", this.seeds[j], this.regions[i]);
-                team.name = contest.seeds[team.seed][team.region].name;
+                let seed = this.seeds[j];
+                let region = this.regions[i];
+                let contestteam = contest.seeds[seed][region];
+                let team: Team = new Team(contestteam.name,
+                    seed,
+                    region,
+                    contestteam.stillIn,
+                    contestteam.wins
+                );
+
                 teams.push(team);
             }
             this.regions[i] = {name: this.regions[i]};
         }
-        this.bracket = new Bracket(null, teams, 1);
+        this.bracket = new Bracket(null, teams, 1, this.the64);
         this.regions[0].bracket = this.bracket.a.a;
         this.regions[1].bracket = this.bracket.a.b;
         this.regions[2].bracket = this.bracket.b.a;

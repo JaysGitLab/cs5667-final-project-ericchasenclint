@@ -2,12 +2,22 @@ export class Team {
     name: string;
     seed: number;
     region: string;
-    constructor(name: string, seed: number, region: string){
+    stillIn: boolean = true;
+    wins: number = 0;
+    constructor(
+        name: string,
+        seed: number,
+        region: string,
+        stillIn: boolean,
+        wins: number)
+    {
         this.name = name;
         this.seed = seed;
         this.region = region;
+        this.stillIn = stillIn;
+        this.wins = wins;
     }
-    static nullTeam: Team = new Team("???", 0, "");
+    static nullTeam: Team = new Team("???", 0, "", false, 0);
 }
 
 export class Bracket {
@@ -15,21 +25,28 @@ export class Bracket {
     a: Bracket;
     b: Bracket;
     up: Bracket;
-    positions: Bracket[];
+    subtree: Bracket[];
     impossible = false;
     level: number;
-    constructor(up: Bracket, teams: Team[], level: number){
+
+    constructor(up: Bracket, teams: Team[], level: number, the64: Bracket[]){
         this.up = up;
         this.level = level;
         if(this.up == null){
-            this.positions= [];
+            this.subtree= [];
         }
         if (level ===  64) {
             this.team = teams.shift();
+            the64.push(this);
+            let node: Bracket = this;
+            for (let i = 0; i<this.team.wins; i++){
+               node = node.up;
+               node.setTeam(this.team);
+            }
         } else {
             this.team == Team.nullTeam;
-            this.a = new Bracket(this, teams, level * 2);
-            this.b = new Bracket(this, teams, level * 2);
+            this.a = new Bracket(this, teams, level * 2, the64);
+            this.b = new Bracket(this, teams, level * 2, the64);
         }
         this.register(this);
     }
@@ -40,7 +57,7 @@ export class Bracket {
     validate(){
         if(this.team === Team.nullTeam){
             this.impossible = false;
-        }else if(this.a){
+        }else if(this.a && this.b){
             this.impossible = this.team !== this.a.team
             && this.team !== this.b.team;
         }
@@ -48,11 +65,11 @@ export class Bracket {
             this.up.validate();
         }
     }
-    register(position: Bracket){
+    register(node: Bracket){
         if(this.up != null){
-            this.up.register(position);
+            this.up.register(node);
         }else{
-            this.positions.push(position);
+            this.subtree.push(node);
         }
     }
 }

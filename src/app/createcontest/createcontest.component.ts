@@ -72,7 +72,11 @@ export class CreateContestComponent implements OnInit{
             this._contestService
                 .create(contest)
                 .subscribe(createdContest => this._router.navigate(['/']),
-                        error => this.errorMessage = error);
+                        error => {
+                            this.errorMessage = error;
+                            console.log(this.errorMessage);
+                        }
+                );
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){
