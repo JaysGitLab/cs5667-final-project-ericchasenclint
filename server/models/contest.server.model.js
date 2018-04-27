@@ -16,6 +16,8 @@ const Seed = new Schema({
 
 const ContestSchema = new Schema({
     year: {type: Number, min: 2000, max: 3000},
+    startDate: {type: Date},
+    endDate: {type: Date},
     gender: {type: String, enum: ["Women", "Men"]},
     seeds: [Seed]
 });

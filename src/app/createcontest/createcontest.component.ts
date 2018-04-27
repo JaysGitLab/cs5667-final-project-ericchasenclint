@@ -15,6 +15,11 @@ export class CreateContestComponent implements OnInit{
     regions: string[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     showInvalidWarning = false;
+    minStartDate: Date = new Date();
+    maxStartDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+
+    minEndDate: Date = new Date();
+    maxEndDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
 
     errorMessage: string;
 
@@ -30,6 +35,8 @@ export class CreateContestComponent implements OnInit{
         this.contestform = this.fb.group({
             year: this.fb.control((new Date()).getFullYear(), Validators.required),
             gender: this.fb.control(null, Validators.required),
+            startDate: this.fb.control(null, Validators.required),
+            endDate: this.fb.control(null, Validators.required),
         });
         for (let seed of this.seeds){
             for (let region of this.regions ){
@@ -52,6 +59,11 @@ export class CreateContestComponent implements OnInit{
         out["year"] = this.contestform.get('year').value;
         out["gender"] = this.contestform.get('gender').value;
         out["seeds"] = [];
+        
+        // Grab start and end dates
+        out["startDate"] = this.contestform.get("startDate").value;
+        out["endDate"] = this.contestform.get("endDate").value;
+
         for (let seed of this.seeds){
             let seedObj = {};
             out["seeds"][seed] = seedObj;
@@ -109,6 +121,12 @@ export class CreateContestComponent implements OnInit{
                 },
                 error =>{})
         }
+    }
+    
+    onDatePickerChange(event) {
+      this.minEndDate = new Date(event);
+      let date = new Date(event);
+      this.maxEndDate = new Date(date.setFullYear(date.getFullYear() + 1));
     }
 }
 
