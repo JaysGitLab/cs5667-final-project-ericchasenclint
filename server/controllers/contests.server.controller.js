@@ -53,7 +53,7 @@ exports.addEntry = function(req, res, next){
     console.log(query);
     console.log(req.body);
 //    let entry: Entry = new Entry(req.body);
-    Contest.findOneAndUpdate(query, {$push: {entry: req.body}},
+    Contest.findOneAndUpdate(query, {$push: {entries: req.body}},
         (err, entry) => {
             if (err) {
                 return next(err);
