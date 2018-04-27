@@ -11,6 +11,8 @@ import { seedText } from "./data/data";
   templateUrl: "./team.component.html"
 })
 export class TeamComponent {
+  name: string = "";
+  email: string = "";
   paramsObserver: any;
   teamsReady = false;
   teams = [];
@@ -79,13 +81,39 @@ export class TeamComponent {
   submitSelection() {
       console.log(this.selection);
       if (this.validSelection()){
-          alert("All teams are in!\nThat's a valid selection. \nWe need to store it in the db.");
+          let entry = {
+              name: this.name,
+              email: this.email,
+              RegionsBySeed: []
+          }
+          for (let i=0; i<16; i++){
+              entry.RegionsBySeed[i] = this.selection[i].region;
+          }
+          console.log(entry);
+          this._contestService.addEntry(this.year, this.gender, entry)
+              .subscribe(
+                  entry => {
+                      console.log(entry);
+                      alert("Thanks for your entry!");
+                  },
+                  error => {
+                      console.log("from team.component: " + error);
+                      this._router.navigate(['/']);
+                  }
+              );
+
       } else {
-          alert("You must select one team for every seed");
+          alert("You must select one team for every seed, and input your name and email address.");
       }
   }
-
+  validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
   validSelection(){
+      if (this.name.length == 0) return false;
+      if (!this.validateEmail(this.email)) return false;
+      
       if (this.selection.length !== 16){
           return false;
       }

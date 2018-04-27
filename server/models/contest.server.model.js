@@ -14,10 +14,22 @@ const Seed = new Schema({
     West: Team
 });
 
+const RegionSeed = new Schema({
+    seed: Number,
+    region: String
+});
+
+const Entry = new Schema({
+    name: String,
+    email: String,
+    RegionsBySeed: [String]
+});
+
 const ContestSchema = new Schema({
     year: {type: Number, min: 2000, max: 3000},
     gender: {type: String, enum: ["Women", "Men"]},
-    seeds: [Seed]
+    seeds: [Seed],
+    entries: [Entry]
 });
 
 mongoose.model('Contest', ContestSchema);
