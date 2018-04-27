@@ -1,0 +1,18 @@
+  <h1 class="year-gender">{{year}} {{gender}}'s Basketball</h1>
+  <div class="centered-container">
+    <div class="seed-row" *ngFor="let seed of teams; let i = index">
+      <h2 class="seed-title">{{seedText[i]}}</h2>
+      <table class="team-table">
+        <tr class="team-row">
+          <td
+              *ngFor="let team of seed; let j = index"
+              class="team"
+              [class.selected]="showSelectedTeam(seed[j])"
+              (click)="addTeam(seed[j], i)"
+          >{{ seed[j].name }}</td>
+        </tr>
+      </table>
+    </div>
+    <button class="btn" (click)="submitSelection()">Submit</button>
+  </div>
+
