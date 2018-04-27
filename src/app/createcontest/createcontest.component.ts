@@ -130,6 +130,30 @@ export class CreateContestComponent implements OnInit{
       let date = new Date(event);
       this.maxEndDate = new Date(date.setFullYear(date.getFullYear() + 1));
     }
+
+//    fieldCss(seed, region): string {
+//        let formCtrl: AbstractControl=this.contestform.get(seed+region);
+//        console.log("gettingCss");
+//        console.log(formCtrl);
+//        if (!formCtrl.valid && formCtrl.dirty){
+//           return "mat-form-field-invalid";
+//        } else {
+//            return "";
+//        }
+//    }
+    options = [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",    
+        "a",   
+        "a",
+    ]
+    fieldFocused(seed, region){
+        console.log("focused " + seed + " " + region);
+    }
 }
 
 class TeamValidator{

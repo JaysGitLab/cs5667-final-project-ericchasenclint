@@ -42,8 +42,10 @@
             <tr *ngFor="let seed of seeds">  
 								<!--<th>{{seed}}</th>-->
                 <td *ngFor="let region of regions">
-                <input matInput placeholder="{{seed}} {{region}}" aria-label="Team"
-                       formControlName="{{seed}}{{region}}"><!--[matAutocomplete]="auto"-->
+                <mat-form-field class="dropdown-full-width"><!-- [ngClass]="fieldCss(seed, region)"-->
+                <input matInput [placeholder]="seed+region" aria-label="Team"
+                      [matAutocomplete]="auto" [formControlName]="seed+region" (focus)="fieldFocused(seed, region)"><!---->
+                </mat-form-field>
                   <!--<team-dropdown
                         [region]="region"
                         [seed]="seed"
@@ -52,6 +54,13 @@
                 <td>
             </tr>  
         </table>
+        <mat-autocomplete #auto="matAutocomplete"  autoActiveFirstOption >
+          <mat-option *ngFor="let option of options" [value]="option"><!-- *ngFor="let team of filteredTeams| async" [value]="team.name"-->
+            <!--<img style="vertical-align:middle;" aria-hidden
+            src= https://sports.cbsimg.net/images/collegebasketball/logos/50x50/{{team.short}}.png" height="25" />-->
+            <small>{{option}}</small>
+          </mat-option>
+        </mat-autocomplete>
         <p *ngIf="showInvalidWarning">You need to complete the form before submitting</p>
         <button mat-raised-button (click)="onSubmit()">Submit</button>
     </form>
