@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { CreateContestRoutes } from './createcontest.routes';
 import { CreateContestComponent} from './createcontest.component';
-import { TeamDropdownComponent } from './team-dropdown/team-dropdown.component';
 
 import {
   MatAutocompleteModule,
@@ -37,7 +36,6 @@ import {
     ],
     declarations: [
         CreateContestComponent,
-        TeamDropdownComponent,
     ]
 })
 

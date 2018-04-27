@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
-import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
 import {Observable} from 'rxjs/Observable';
@@ -28,6 +27,7 @@ export class CreateContestComponent implements OnInit{
     errorMessage: string;
 
     contestform: FormGroup;
+    filteredTeams: Observable<any[]>;
 
     constructor (private fb: FormBuilder, private _router: Router,
         private _contestService: ContestService) {
@@ -141,18 +141,36 @@ export class CreateContestComponent implements OnInit{
 //            return "";
 //        }
 //    }
-    options = [
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",    
-        "a",   
-        "a",
-    ]
     fieldFocused(seed, region){
         console.log("focused " + seed + " " + region);
+        let formControl: AbstractControl = this.contestform.get(seed+region);
+        this.filteredTeams = formControl.valueChanges
+            .startWith(formControl.value)
+            .map(searchString => searchString ? this.filterTeams(searchString) : Teams.teams.slice());
+    }
+
+    teamMatches(searchTerms: string[], team: any){
+      for(var strIdx=0; strIdx<searchTerms.length; strIdx++){
+          let searchTerm = searchTerms[strIdx];
+          if (!team.detail.toLocaleLowerCase().includes(searchTerm)){
+              return false;
+          }
+      }
+      return true;
+    }
+    filterTeams(searchString: string){
+      if (searchString.length == 0) {
+          return [];
+      }
+      searchString = searchString.toLocaleLowerCase();
+      let searchTerms: string[] = searchString.split(" ");
+      let matches: any[] = [];
+      for(var teamIdx: number = 0; teamIdx < Teams.teams.length; teamIdx++){
+         if (this.teamMatches(searchTerms, Teams.teams[teamIdx])){
+            matches.push(Teams.teams[teamIdx]);
+         }
+      }
+      return matches;
     }
 }
 

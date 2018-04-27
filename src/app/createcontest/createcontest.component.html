@@ -55,10 +55,10 @@
             </tr>  
         </table>
         <mat-autocomplete #auto="matAutocomplete"  autoActiveFirstOption >
-          <mat-option *ngFor="let option of options" [value]="option"><!-- *ngFor="let team of filteredTeams| async" [value]="team.name"-->
-            <!--<img style="vertical-align:middle;" aria-hidden
-            src= https://sports.cbsimg.net/images/collegebasketball/logos/50x50/{{team.short}}.png" height="25" />-->
-            <small>{{option}}</small>
+          <mat-option *ngFor="let team of filteredTeams| async" [value]="team.name">
+            <img style="vertical-align:middle;" aria-hidden
+            src= "https://sports.cbsimg.net/images/collegebasketball/logos/50x50/{{team.short}}.png" height="25"/>
+            <small>{{team.detail}}</small>
           </mat-option>
         </mat-autocomplete>
         <p *ngIf="showInvalidWarning">You need to complete the form before submitting</p>
