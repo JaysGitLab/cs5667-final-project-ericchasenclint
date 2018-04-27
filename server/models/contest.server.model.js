@@ -8,10 +8,10 @@ const Team = new Schema({
 });
 
 const Seed = new Schema({
-    North: Team,
     South: Team,
     East: Team,
-    West: Team
+    West: Team,
+    Midwest: Team,
 });
 
 const ContestSchema = new Schema({

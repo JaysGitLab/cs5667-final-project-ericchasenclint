@@ -1,0 +1,50 @@
+.bracketcontainer{
+    position: relative;
+    margin: 0;
+}
+.team-name{
+    width: 220px;
+    display: inline-block;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    vertical-align: top;
+    border: 1px solid black;
+}
+.parents{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    position: relative;
+    display: inline-block;
+}
+.bracket-above > * > .team-name{
+    vertical-align: bottom;
+    border-bottom: 0;
+}
+
+.bracket-below > * > .team-name{
+    border-top: 0;
+}
+.selected{
+    background-color: #ccc;
+}
+.impossible{
+    background-color: red;
+}
+.top{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
+.x-button{
+    color: red;
+}
+.impossible .x-button{
+    color: black;
+}
+.seedSpan{
+    display: inline-block;
+    width: 15px;
+    font-size: x-small;
+}

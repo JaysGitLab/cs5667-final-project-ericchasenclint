@@ -1,0 +1,22 @@
+<div class="bracketcontainer">
+    <div class="parents" *ngIf="bracket.a && bracket.level!=displayUntil">
+        <app-bracket class="bracket-above"
+            [showName]="true"
+            [bracket]="bracket.a"
+            [displayUntil]=displayUntil></app-bracket>
+        <app-bracket class="bracket-below"
+            [showName]="true"
+            [bracket]="bracket.b"
+            [displayUntil]=displayUntil></app-bracket>
+    </div>
+    <div class="team-name " *ngIf="showName" 
+         [class.selected]="bracket.team.name !='???' && bracket.up && bracket.team.name == bracket.up.team.name"
+         [class.impossible]="bracket.impossible"
+         [ngClass]="{'top':top}">
+        <span (click)="onSelect(bracket.team)">
+            <span class="seedSpan" *ngIf="bracket.team.name!='???'">{{ bracket.team.seed }}</span>
+            {{bracket.team.name}}
+        </span>
+        <span *ngIf="bracket.level!=64 && bracket.team.name !='???'" class="x-button" (click)="clear()">&otimes;</span>
+    </div>
+</div>

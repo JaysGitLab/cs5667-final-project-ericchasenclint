@@ -5,8 +5,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
-import { ContestInfo } from './contestinfo'
-
 @Component({
     selector: 'createcontest',
     templateUrl: './createcontest.component.html',
@@ -14,7 +12,7 @@ import { ContestInfo } from './contestinfo'
     providers: [ContestService]
 })
 export class CreateContestComponent implements OnInit{
-    regions: string[] = ["North", "South", "East", "West"];
+    regions: string[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     showInvalidWarning = false;
     minStartDate: Date = new Date();
@@ -24,7 +22,6 @@ export class CreateContestComponent implements OnInit{
     maxEndDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
 
     errorMessage: string;
-    contestinfo : ContestInfo = new ContestInfo();
 
     contestform: FormGroup;
 
@@ -87,7 +84,11 @@ export class CreateContestComponent implements OnInit{
             this._contestService
                 .create(contest)
                 .subscribe(createdContest => this._router.navigate(['/']),
-                        error => this.errorMessage = error);
+                        error => {
+                            this.errorMessage = error;
+                            console.log(this.errorMessage);
+                        }
+                );
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){

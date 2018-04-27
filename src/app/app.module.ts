@@ -49,6 +49,7 @@ import { NavBarModule } from './navbar/navbar.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CreateContestModule } from './createcontest/createcontest.module';
 import { TeamSelectModule } from './team-select/team.select.module';
+import { UpdateBracketModule } from './updatebracket/updatebracket.module';
 
 // Services
 import { AuthenticationService } from "./authentication/authentication.service";
@@ -94,6 +95,7 @@ type StoreType = {
     AuthenticationModule,
     CreateContestModule,
     TeamSelectModule,
+    UpdateBracketModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,

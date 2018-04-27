@@ -1,1 +1,1 @@
-export * from "./team.select.component";
+export * from "./team.component";

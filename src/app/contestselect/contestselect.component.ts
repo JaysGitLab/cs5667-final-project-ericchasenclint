@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { ContestService } from "../../createcontest/createcontest.service";
+import { ContestService } from "../createcontest/createcontest.service";
 
 @Component({
     selector: "contestselect",
@@ -10,9 +10,11 @@ import { ContestService } from "../../createcontest/createcontest.service";
 })
 export class ContestSelectComponent{
     currentContests: any;
+    message: string;
 
     constructor(
         private _router: Router,
+        private _route: ActivatedRoute,
         private _contestService: ContestService,
     ) {}
 
@@ -27,9 +29,12 @@ export class ContestSelectComponent{
                  this._router.navigate(['/']);
              }
         );
+        this._route.data.subscribe(data => {
+            this.message = data['msg'];
+        });
     }
 
     selectcontest(contest){
-        this._router.navigate(['/entercontest', contest.year, contest.gender]);
+        this._router.navigate([this._router.url, contest.year, contest.gender]);
     }
 }
