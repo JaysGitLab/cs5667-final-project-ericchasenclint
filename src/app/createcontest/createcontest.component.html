@@ -42,11 +42,13 @@
             <tr *ngFor="let seed of seeds">  
 								<!--<th>{{seed}}</th>-->
                 <td *ngFor="let region of regions">
-                  <team-dropdown
+                <input matInput placeholder="{{seed}} {{region}}" aria-label="Team"
+                       formControlName="{{seed}}{{region}}"><!--[matAutocomplete]="auto"-->
+                  <!--<team-dropdown
                         [region]="region"
                         [seed]="seed"
                         [contestFormGroup]="contestform"
-                  ></team-dropdown>
+                  ></team-dropdown>-->
                 <td>
             </tr>  
         </table>
