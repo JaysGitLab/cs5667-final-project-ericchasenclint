@@ -1,6 +1,7 @@
-.bracketcontainer{
+:host{
     position: relative;
     margin: 0;
+    display: block;
 }
 .team-name{
     width: 220px;
@@ -17,12 +18,12 @@
     position: relative;
     display: inline-block;
 }
-.bracket-above > * > .team-name{
+.bracket-above > .team-name{
     vertical-align: bottom;
     border-bottom: 0;
 }
 
-.bracket-below > * > .team-name{
+.bracket-below > .team-name{
     border-top: 0;
 }
 .selected{
