@@ -15,6 +15,8 @@ import {
   MatRadioModule,
   MatRippleModule,
   MatSortModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 
 @NgModule({
@@ -29,6 +31,8 @@ import {
         MatRadioModule,
         MatRippleModule,
         MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         RouterModule.forChild(CreateContestRoutes),
     ],
     declarations: [
