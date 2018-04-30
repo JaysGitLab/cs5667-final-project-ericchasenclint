@@ -19,6 +19,7 @@ const ContestSchema = new Schema({
     startDate: {type: Date},
     endDate: {type: Date},
     gender: {type: String, enum: ["Women", "Men"]},
+    regions: [String],
     seeds: [Seed]
 });
 

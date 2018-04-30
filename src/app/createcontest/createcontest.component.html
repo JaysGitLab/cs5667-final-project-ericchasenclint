@@ -1,57 +1,61 @@
 <div>
     <router-outlet></router-outlet>
     <form class="createcontestform" [formGroup]='contestform'>
-        <div class="row">
-					<div class="col-md-2">
-						<mat-form-field class="yearfield">
-							<input matInput type="number" placeholder="Year" formControlName="year" (change)="yeargenderchange()">
-						</mat-form-field>
-					</div>
-					<div class="col-md-10">	
-						<div class="start-end-container">
-							<mat-form-field>
-								<input matInput required [matDatepicker]="startPicker"
-								placeholder="Choose a start date" [min]="minStartDate"
-								[max]="maxStartDate"  formControlName="startDate">
-								<mat-datepicker-toggle matSuffix
-								[for]="startPicker"></mat-datepicker-toggle>
-								<mat-datepicker (selectedChanged)="onDatePickerChange($event)" #startPicker></mat-datepicker>
-							</mat-form-field>
-	
-							<mat-form-field>
-								<input matInput required [matDatepicker]="endPicker"
-								placeholder="Choose an end date" [min]="minEndDate"
-								[max]="maxEndDate" formControlName="endDate">
-								<mat-datepicker-toggle matSuffix
-								[for]="endPicker"></mat-datepicker-toggle>
-								<mat-datepicker #endPicker></mat-datepicker>
-							</mat-form-field>
-						</div>
-					</div>
-				</div>
-        <br>
+		<div>
+			<mat-form-field class="yearfield">
+				<input matInput type="number" placeholder="Year" formControlName="year" (change)="yeargenderchange()">
+			</mat-form-field>
+		</div>
+		<div class="start-end-container">
+			<mat-form-field>
+				<input matInput required [matDatepicker]="startPicker"
+				placeholder="Choose a start date" [min]="minStartDate"
+				[max]="maxStartDate"  formControlName="startDate">
+				<mat-datepicker-toggle matSuffix
+				[for]="startPicker"></mat-datepicker-toggle>
+				<mat-datepicker (selectedChanged)="onDatePickerChange($event)" #startPicker></mat-datepicker>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput required [matDatepicker]="endPicker"
+				placeholder="Choose an end date" [min]="minEndDate"
+				[max]="maxEndDate" formControlName="endDate">
+				<mat-datepicker-toggle matSuffix
+				[for]="endPicker"></mat-datepicker-toggle>
+				<mat-datepicker #endPicker></mat-datepicker>
+			</mat-form-field>
+		</div>
         <mat-radio-group formControlName="gender" [ngClass]="genderClass()" (change)="yeargenderchange()">
             <mat-radio-button value="Women">Women</mat-radio-button>
             <mat-radio-button value="Men">Men</mat-radio-button>
         </mat-radio-group>
-				<table>
-            <!--<tr>
-                <td></td>
-                <th *ngFor="let region of regions">{{region}}</th>
-            </tr>-->
+        <div>
+            Regions
+            <div><small>Enter the region in the appropriate order. In the final four, region 1 will face region 2 and region 3
+                        will face region 4.</small></div>
+        </div>
+		<table>
+		    <tr>
+                <td *ngFor="let regionNo of regionNos">
+                <mat-form-field class="dropdown-full-width" >
+                    <mat-select [placeholder]="'Region '+regionNo"
+                                [formControlName]="'Region'+regionNo">
+                        <mat-option>None</mat-option>
+                        <mat-option
+                            *ngFor="let region of regions"
+                            [value]="region">
+                            {{region}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </td>
+		    </tr>
             <tr *ngFor="let seed of seeds">  
-								<!--<th>{{seed}}</th>-->
-                <td *ngFor="let region of regions">
+                <td *ngFor="let region of assignedRegions">
                 <mat-form-field class="dropdown-full-width"><!-- [ngClass]="fieldCss(seed, region)"-->
                 <input matInput [placeholder]="seed+region" aria-label="Team"
                       [matAutocomplete]="auto" [formControlName]="seed+region" (focus)="fieldFocused(seed, region)"><!---->
                 </mat-form-field>
-                  <!--<team-dropdown
-                        [region]="region"
-                        [seed]="seed"
-                        [contestFormGroup]="contestform"
-                  ></team-dropdown>-->
-                <td>
             </tr>  
         </table>
         <mat-autocomplete #auto="matAutocomplete"  autoActiveFirstOption >
