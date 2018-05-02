@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../authentication/authentication.service';
+import { LocalStorage } from 'ngx-store';
+
 
 @Component({
   selector: 'home',  // <home></home>
@@ -9,9 +11,15 @@ import {AuthenticationService} from '../authentication/authentication.service';
 
 
 export class HomeComponent {
-    user: any;
+    @LocalStorage('user') user: any;
+    //user: any;
 
     constructor (private _authenticationService: AuthenticationService){
         this.user = _authenticationService.user;
+    }
+
+    signout(){
+        localStorage.clear();
+        window.location.replace("/api/auth/signout");
     }
 }

@@ -1,6 +1,6 @@
 <div class="container h-100" >
     <div class="row justify-content-center align-items-center h-100">
-        <div class="col offset-md-3 text-center" ng-app="SigninForm">
+        <div *ngIf="user" class="col offset-md-3 text-center" ng-app="SigninForm">
             <mat-card class="signup" align="center">
                 <mat-toolbar>
                   <div class="md-toolbar-tools">
@@ -28,6 +28,11 @@
                     </form>
                 </mat-card-content>
             </mat-card>
+        </div>
+
+        <div *ngIf="!user">
+            Invalid Page
+            <button (click)="test()">test</button>
         </div>
     </div>
 </div>

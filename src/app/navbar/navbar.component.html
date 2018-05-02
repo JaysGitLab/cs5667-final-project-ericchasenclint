@@ -6,7 +6,14 @@
     </a>
   </div>
   <div class="link-container">
-    <a routerLink="/rules" class="link">Rules</a>
+    <button *ngIf="user" mat-button [matMenuTriggerFor]="menu">Settings</button>
+		<mat-menu #menu="matMenu">
+			<button mat-menu-item routerLink="/authentication/signup">Signup</button>
+		</mat-menu>
+		
+	<a *ngIf="!user" routerLink="/authentication/signin" class="link">Login</a>
+
+	<a routerLink="/rules" class="link">Rules</a>
     <a routerLink="" class="link">Standings</a>
     <a routerLink="/entercontest" class="edge-link primary-cta">Create An Entry</a>
   </div>

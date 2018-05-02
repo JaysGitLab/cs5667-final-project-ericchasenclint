@@ -1,6 +1,6 @@
 <div *ngIf="user">
     <h1>Hello {{user.firstName}}</h1>
-    <a href="/api/auth/signout">Signout</a>
+     <button (click)="signout()">Signout</button>
 
     <ul>
         <li><a [routerLink]="['/articles']">List Articles</a></li>
