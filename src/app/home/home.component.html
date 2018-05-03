@@ -1,18 +1,10 @@
 <div *ngIf="user">
-    <h1>Hello {{user.firstName}}</h1>
+    <h1>Hello {{user.fullName}}</h1>
      <button (click)="signout()">Signout</button>
-
-    <ul>
-        <li><a [routerLink]="['/articles']">List Articles</a></li>
-        <li><a [routerLink]="['/articles/create']">Create Articles</a></li>
-        <li><a [routerLink]="['/chat']">Chat</a></li>
-    </ul>
-
+     <a [routerLink]="['/authentication/signup']">Signup</a>
+     <a [routerLink]="['/createcontest']">Create Contest</a>
 </div>
 <div *ngIf="!user">
-    <a [routerLink]="['/authentication/signup']">Signup</a>
     <a [routerLink]="['/authentication/signin']">Signin</a>
 </div>
-<div>
-    <a [routerLink]="['/createcontest']">Create Contest</a>
-</div>
+

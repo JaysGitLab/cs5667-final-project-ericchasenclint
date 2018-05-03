@@ -9,17 +9,21 @@
                 </mat-toolbar>
                 <mat-card-content>
                     <form (submit)="signup()">
+                      <br *ngIf="show" />
+                      <div *ngIf="show" class="alert alert-warning" role="alert">
+                          {{errorMessage}}
+                      </div>	
                       <br />
                       <mat-form-field class="md-block">
-                        <input type="text" matInput name="fullName" placeholder="Enter your full name" [(ngModel)]="user.fullName" required="" />
+                        <input type="text" matInput name="fullName" placeholder="Enter your full name" [(ngModel)]="newUser.fullName" required="" />
                       </mat-form-field>
                    
                       <mat-form-field class="md-block">
-                        <input type="email" matInput name="username" placeholder="Enter email" [(ngModel)]="user.username" required="" />
+                        <input type="email" matInput name="username" placeholder="Enter email" [(ngModel)]="newUser.username" required="" />
                       </mat-form-field>
                       
                       <mat-form-field class="md-block">
-                        <input type="password" matInput name="password" placeholder="Password" [(ngModel)]="user.password" required="" />
+                        <input type="password" matInput name="password" placeholder="Password" [(ngModel)]="newUser.password" required="" />
                       </mat-form-field>
                       
                       <div class="md-block">
