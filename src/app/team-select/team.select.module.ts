@@ -4,9 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { TeamSelectRoutes } from './team.select.routes.ts';
-import { TeamComponent } from "./team/team.component.ts";
-import { TeamSelectComponent } from "./team.select.component.ts";
-import { ContestSelectComponent } from "./contestselect/contestselect.component";
+import { TeamComponent } from "./team.component.ts";
+import { ContestSelectComponent } from "../contestselect/contestselect.component";
 
 import {
     MatButtonModule,
@@ -25,8 +24,8 @@ import {
     ],
     declarations: [
         TeamComponent,
-        TeamSelectComponent,
         ContestSelectComponent
     ]
 })
+
 export class TeamSelectModule { }

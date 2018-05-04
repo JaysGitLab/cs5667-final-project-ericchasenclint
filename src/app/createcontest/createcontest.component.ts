@@ -5,8 +5,6 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { TeamDropdownComponent} from './team-dropdown/team-dropdown.component';
 import { ContestService } from './createcontest.service';
 
-import { ContestInfo } from './contestinfo'
-
 @Component({
     selector: 'createcontest',
     templateUrl: './createcontest.component.html',
@@ -14,12 +12,16 @@ import { ContestInfo } from './contestinfo'
     providers: [ContestService]
 })
 export class CreateContestComponent implements OnInit{
-    regions: string[] = ["North", "South", "East", "West"];
+    regions: string[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     showInvalidWarning = false;
+    minStartDate: Date = new Date();
+    maxStartDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+
+    minEndDate: Date = new Date();
+    maxEndDate: Date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
 
     errorMessage: string;
-    contestinfo : ContestInfo = new ContestInfo();
 
     contestform: FormGroup;
 
@@ -33,6 +35,8 @@ export class CreateContestComponent implements OnInit{
         this.contestform = this.fb.group({
             year: this.fb.control((new Date()).getFullYear(), Validators.required),
             gender: this.fb.control(null, Validators.required),
+            startDate: this.fb.control(null, Validators.required),
+            endDate: this.fb.control(null, Validators.required),
         });
         for (let seed of this.seeds){
             for (let region of this.regions ){
@@ -56,6 +60,11 @@ export class CreateContestComponent implements OnInit{
         out["gender"] = this.contestform.get('gender').value;
         out["seeds"] = [];
         out["entries"] = [];
+        
+        // Grab start and end dates
+        out["startDate"] = this.contestform.get("startDate").value;
+        out["endDate"] = this.contestform.get("endDate").value;
+
         for (let seed of this.seeds){
             let seedObj = {};
             out["seeds"][seed] = seedObj;
@@ -76,7 +85,11 @@ export class CreateContestComponent implements OnInit{
             this._contestService
                 .create(contest)
                 .subscribe(createdContest => this._router.navigate(['/']),
-                        error => this.errorMessage = error);
+                        error => {
+                            this.errorMessage = error;
+                            console.log(this.errorMessage);
+                        }
+                );
         } else {
             this.showInvalidWarning = true;
             for (let parent in this.contestform.controls){
@@ -109,6 +122,12 @@ export class CreateContestComponent implements OnInit{
                 },
                 error =>{})
         }
+    }
+    
+    onDatePickerChange(event) {
+      this.minEndDate = new Date(event);
+      let date = new Date(event);
+      this.maxEndDate = new Date(date.setFullYear(date.getFullYear() + 1));
     }
 }
 

@@ -36,6 +36,7 @@ import { ROUTES } from "./app.routes";
 // Components
 
 import { HomeComponent } from "./home";
+import { NavBarComponent } from "./navbar";
 import { ReactComponent } from "./react";
 
 // App is our top level component
@@ -49,6 +50,7 @@ import { NavBarModule } from './navbar/navbar.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CreateContestModule } from './createcontest/createcontest.module';
 import { TeamSelectModule } from './team-select/team.select.module';
+import { UpdateBracketModule } from './updatebracket/updatebracket.module';
 
 // Services
 import { AuthenticationService } from "./authentication/authentication.service";
@@ -57,6 +59,8 @@ import { ContestService } from "./createcontest/createcontest.service";
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { WebStorageModule } from 'ngx-store';
+
 
 import "../styles/styles.scss";
 import "../styles/headings.css";
@@ -94,6 +98,7 @@ type StoreType = {
     AuthenticationModule,
     CreateContestModule,
     TeamSelectModule,
+    UpdateBracketModule,
     HttpModule,
     HttpClientModule,
     MatToolbarModule,
@@ -103,6 +108,7 @@ type StoreType = {
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    WebStorageModule,
     RouterModule.forRoot(ROUTES, {
       useHash: false,
       preloadingStrategy: PreloadAllModules
