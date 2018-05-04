@@ -31,27 +31,16 @@
         </mat-radio-group>
         <div>
             Regions
-            <div><small>Enter the region in the appropriate order. In the final four, region 1 will face region 2 and region 3
+            <div><small>Drag and drop the regions in the following list into the proper order. In the final four, region 1 will face region 2 and region 3
                         will face region 4.</small></div>
         </div>
+
+<div [sortablejs]="regions" id="region-sort">
+    <mat-card *ngFor="let region of regions; let i = index" class="region-card">{{i + 1}} {{region}}</mat-card>
+</div>
 		<table>
-		    <tr>
-                <td *ngFor="let regionNo of regionNos">
-                <mat-form-field class="dropdown-full-width" >
-                    <mat-select [placeholder]="'Region '+regionNo"
-                                [formControlName]="'Region'+regionNo">
-                        <mat-option>None</mat-option>
-                        <mat-option
-                            *ngFor="let region of regions"
-                            [value]="region">
-                            {{region}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                </td>
-		    </tr>
             <tr *ngFor="let seed of seeds">  
-                <td *ngFor="let region of assignedRegions">
+                <td *ngFor="let region of regions">
                 <mat-form-field class="dropdown-full-width"><!-- [ngClass]="fieldCss(seed, region)"-->
                 <input matInput [placeholder]="seed+region" aria-label="Team"
                       [matAutocomplete]="auto" [formControlName]="seed+region" (focus)="fieldFocused(seed, region)"><!---->

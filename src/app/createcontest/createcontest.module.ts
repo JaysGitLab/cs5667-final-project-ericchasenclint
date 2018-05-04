@@ -6,9 +6,12 @@ import { RouterModule } from '@angular/router';
 import { CreateContestRoutes } from './createcontest.routes';
 import { CreateContestComponent} from './createcontest.component';
 
+import { SortablejsModule } from 'angular-sortablejs';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
+  MatCardModule,
   MatInputModule,
   MatMenuModule,
   MatRadioModule,
@@ -26,6 +29,7 @@ import {
         ReactiveFormsModule,
         MatAutocompleteModule,
         MatButtonModule,
+        MatCardModule,
         MatInputModule,
         MatMenuModule,
         MatRadioModule,
@@ -35,6 +39,7 @@ import {
         MatDatepickerModule,
         MatNativeDateModule,
         RouterModule.forChild(CreateContestRoutes),
+        SortablejsModule.forRoot({ animation: 150 }),
     ],
     declarations: [
         CreateContestComponent,

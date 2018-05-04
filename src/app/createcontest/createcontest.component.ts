@@ -17,7 +17,6 @@ import 'rxjs/add/operator/map';
 export class CreateContestComponent implements OnInit{
     regionNos=[1, 2, 3, 4];
     regions: string[] = ["East", "Midwest", "South", "West"];
-    assignedRegions = [];
     seeds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     showInvalidWarning = false;
     minStartDate: Date = new Date();
@@ -51,31 +50,7 @@ export class CreateContestComponent implements OnInit{
                 this.contestform.addControl(seed + region, formControl);
             }
         }
-        for (let regionNo of this.regionNos){
-            let formControl: FormControl =  new FormControl(
-                null, [Validators.required]);
-            this.contestform.addControl('Region'+regionNo, formControl);
-            formControl.valueChanges.subscribe(
-                value => {
-                    this.assignedRegions.length = 0;
-                    for (let regionNo of this.regionNos){
-                        let usedRegion = this.contestform.get('Region'+regionNo).value;
-                        if (usedRegion != null){
-                            this.assignedRegions.push(usedRegion);
-                        }
-                    }
-                    console.log(this.contestform);
-                },
-                err => console.log(err))
-        }
         console.log(this.contestform);
-    }
-    regionSelectChange(value){
-        console.log(value);
-        console.log(this.assignedRegions);
-    }
-
-    regionSelectChange2(value){
     }
 
     genderClass(){
@@ -108,10 +83,7 @@ export class CreateContestComponent implements OnInit{
                 seedObj[region] = obj;
             }
         }
-        out['regions'] = [];
-        for(let regionNo of this.regionNos){
-            out['regions'].push(this.contestform.get('Region'+regionNo).value);
-        }
+        out['regions'] = this.regions;
         return out;
     }
     onSubmit() {
@@ -207,7 +179,12 @@ export class CreateContestComponent implements OnInit{
       }
       return matches;
     }
+
+
+
 }
+
+
 
 class TeamValidator{
   static knownTeamValidator(): ValidatorFn {
