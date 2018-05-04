@@ -13,6 +13,9 @@ import {
   MatGridListModule,
   MatInputModule,
   MatButtonModule,
+  MatMenuModule,
+  MatIconModule,
+  MatIconRegistry,
   MatExpansionModule
 } from "@angular/material";
 
@@ -27,9 +30,18 @@ import {
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    MatMenuModule,
+    MatIconModule,
     RouterModule.forChild(AuthenticationRoutes)
+  ],
+  providers: [
+    MatIconRegistry
   ],
   exports: [NavBarComponent],
   declarations: [NavBarComponent]
 })
-export class NavBarModule {}
+export class NavBarModule {
+  constructor(public matIconRegistry: MatIconRegistry) {
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  }
+}
