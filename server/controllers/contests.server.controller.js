@@ -33,7 +33,7 @@ exports.byYearAndGender = function(req, res, next){
     let query = {
         year: year,
         gender: gender
-    }
+    };
     Contest.findOne(query, (err, contest) => {
         if (err) {
             return next(err);
@@ -43,6 +43,26 @@ exports.byYearAndGender = function(req, res, next){
     });
 };
 
+exports.addEntry = function(req, res, next){
+    let year = req.year;
+    let gender = req.gender;
+    let query = {
+        year: year,
+        gender: gender
+    };
+    console.log(query);
+    console.log(req.body);
+//    let entry: Entry = new Entry(req.body);
+    Contest.findOneAndUpdate(query, {$push: {entries: req.body}},
+        (err, entry) => {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json(entry);
+            }
+        }
+    );
+};
 
 exports.yearParam = function(req, res, next, year){
     req.year = year;
@@ -53,3 +73,5 @@ exports.genderParam = function(req, res, next, gender){
     req.gender = gender;
     next();
 }
+
+

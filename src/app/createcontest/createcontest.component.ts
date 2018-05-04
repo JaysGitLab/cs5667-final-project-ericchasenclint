@@ -67,6 +67,7 @@ export class CreateContestComponent implements OnInit{
         out["year"] = this.contestform.get('year').value;
         out["gender"] = this.contestform.get('gender').value;
         out["seeds"] = [];
+        out["entries"] = [];
         
         // Grab start and end dates
         out["startDate"] = this.contestform.get("startDate").value;

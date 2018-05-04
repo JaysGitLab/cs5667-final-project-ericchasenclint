@@ -1,4 +1,10 @@
-  <h1 class="year-gender">{{year}} {{gender}}'s Basketball</h1>
+<mat-form-field class="entrydata">
+  <input matInput [(ngModel)]="name" placeholder="Name">
+</mat-form-field>
+<mat-form-field class="entrydata">
+  <input matInput [(ngModel)]="email" type="email" email placeholder="Email" >
+</mat-form-field>
+<h1 class="year-gender">{{year}} {{gender}}'s Basketball</h1>
   <div class="centered-container">
     <div class="seed-row" *ngFor="let seed of teams; let i = index">
       <h2 class="seed-title">{{seedText[i]}}</h2>
