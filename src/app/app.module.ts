@@ -36,6 +36,7 @@ import { ROUTES } from "./app.routes";
 // Components
 
 import { HomeComponent } from "./home";
+import { NavBarComponent } from "./navbar";
 import { ReactComponent } from "./react";
 
 // App is our top level component
@@ -58,6 +59,8 @@ import { ContestService } from "./createcontest/createcontest.service";
 //import { angularProfileCard } from '../../components/main-profile/index';
 import { NoContentComponent } from "./no-content";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { WebStorageModule } from 'ngx-store';
+
 
 import "../styles/styles.scss";
 import "../styles/headings.css";
@@ -105,6 +108,7 @@ type StoreType = {
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    WebStorageModule,
     RouterModule.forRoot(ROUTES, {
       useHash: false,
       preloadingStrategy: PreloadAllModules

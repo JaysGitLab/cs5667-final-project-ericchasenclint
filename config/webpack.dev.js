@@ -140,9 +140,16 @@ module.exports = function (options) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
-        }
+        },
+        NGXSTORE_CONFIG: JSON.stringify({
+          prefix: '', 
+          clearType: 'prefix', // default: 'prefix'
+          mutateObjects: true, // default: true
+          debugMode: false,    // you can enable debug logs if you ever meet any bug to localize its source
+          cookiesScope: '',    // what you pass here will actually prepend base domain
+          cookiesCheckInterval: 0, // number in ms describing how often cookies should be checked for changes
+        })
       }),
-
       // new DllBundlesPlugin({
       //   bundles: {
       //     polyfills: [
