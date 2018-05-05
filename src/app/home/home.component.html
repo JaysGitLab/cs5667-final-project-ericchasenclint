@@ -3,7 +3,7 @@
     <h1 class="hero-title">McRae's Bracket Challenge</h1>
     <h4 class="hero-subtitle">March Madness with a twist.
       <br/> Pick your favorite teams and compete.</h4>
-    <a routerLink="/select" class="primary-cta">Create An Entry</a>
+    <a routerLink="/entercontest" class="primary-cta">Create An Entry</a>
     <div class="split-pictures">
       <div class="hero-picture picture-one"></div>
       <div class="hero-picture picture-two"></div>
@@ -12,6 +12,7 @@
 
   <section class="standard-section explanation-section">
     <h2 class="section-title">How Does It Work?</h2>
+    <button class="section-title" (click)="signout()">Signout - FIX ME</button>
     <div class="standard-panel explanation-left">
       <h4 class="panel-title">What Is Happening?</h4>
       <p class="panel-copy">If you are unfamiliar with how March Madness works, watch the video below.</p>
@@ -64,13 +65,13 @@
       <img class="get-started-cutout divin" src="../../assets/img/generic/divin.png" alt="Sister Jean Cutout">
       <h2 class="section-title">Let's Get Started!</h2>
       <p class="entry-copy">Now that you're all caught up on the rules, create an entry and get your head in the game!</p>
-      <a routerLink="/select" class="primary-cta">Create An Entry</a>
+      <a routerLink="/entercontest" class="primary-cta">Create An Entry</a>
       <img class="get-started-cutout sister-jean" src="../../assets/img/generic/sister-jean.png" alt="Sister Jean Cutout">
     </div>
     <p class="questions-copy">If you have any questions, please contact
       <a class="questions-link" href="mailto:alice.mcrae@gmail.com">alice.mcrae@gmail.com</a>
     </p>
   </section>
-    <button (click)="signout()">Signout</button>
+
 </div>
 

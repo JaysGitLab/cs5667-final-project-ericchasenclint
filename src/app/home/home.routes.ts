@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-import { TeamSelectComponent } from '../team-select/team.select.component';
+import { TeamComponent } from '../team-select/team.component';
 
 export const HomeRoutes: Routes = [
     {
@@ -10,6 +10,6 @@ export const HomeRoutes: Routes = [
     },
     {
         path: 'select',
-        component: TeamSelectComponent
+        component: TeamComponent
     },
 ];

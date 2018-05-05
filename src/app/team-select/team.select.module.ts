@@ -32,7 +32,7 @@ import {
         FormsModule,
         RouterModule.forChild(TeamSelectRoutes)
     ],
-    exports: [TeamSelectComponent], //Unsure if this is needed?
+    exports: [TeamComponent], //Unsure if this is needed?
     declarations: [TeamComponent, ContestSelectComponent]
 })
 
