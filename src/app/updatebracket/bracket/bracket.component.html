@@ -1,4 +1,3 @@
-<div class="bracketcontainer">
     <div class="parents" *ngIf="bracket.a && bracket.level!=displayUntil">
         <app-bracket class="bracket-above"
             [showName]="true"
@@ -19,4 +18,3 @@
         </span>
         <span *ngIf="bracket.level!=64 && bracket.team.name !='???'" class="x-button" (click)="clear()">&otimes;</span>
     </div>
-</div>

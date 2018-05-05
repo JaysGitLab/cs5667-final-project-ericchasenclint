@@ -9,7 +9,7 @@ import { ContestService } from "../createcontest/createcontest.service";
     templateUrl: "./contestselect.component.html"
 })
 export class ContestSelectComponent{
-    currentContests: any;
+    currentContests: any = [];
     message: string;
 
     constructor(

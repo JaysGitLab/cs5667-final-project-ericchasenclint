@@ -37,13 +37,13 @@ export class TeamComponent {
   }
 
   loadContests(year, gender){
-     let regions = ["South", "East", "West", "Midwest"];
      this._contestService.byYearAndGender(year, gender)
          .subscribe(
              contest => {
                  console.log(contest);
                  this.year = contest["year"];
                  this.gender = contest["gender"];
+                 let regions = contest["regions"];
                  for (var seed = 1; seed<=16; seed++){
                      this.teams[seed-1] = [];
                      for (var regionIdx = 0; regionIdx < 4; regionIdx++){

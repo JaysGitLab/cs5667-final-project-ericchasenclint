@@ -13,9 +13,9 @@ import { ContestService } from '../createcontest/createcontest.service';
 })
 export class UpdateBracketComponent implements OnInit{
     teamsReady = false;
+    regions = [];
     the64: Bracket[] = [];
     bracket: Bracket;
-    regions: any[] = ["South", "East", "West", "Midwest"];
     seeds: number[] = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
     year: number;
     gender: string;
@@ -87,12 +87,13 @@ export class UpdateBracketComponent implements OnInit{
   onContestLoaded(contest){
         this.year = contest["year"];
         this.gender = contest["gender"];
+        this.regions = contest["regions"];
 
         let teams: Team[] = [];
         for (let i=0; i<4; i++){
             for (let j=0; j<16; j++){
                 let seed = this.seeds[j];
-                let region = this.regions[i];
+                let region = contest.regions[i];
                 let contestteam = contest.seeds[seed][region];
                 let team: Team = new Team(contestteam.name,
                     seed,
@@ -103,13 +104,13 @@ export class UpdateBracketComponent implements OnInit{
 
                 teams.push(team);
             }
-            this.regions[i] = {name: this.regions[i]};
+            contest.regions[i] = {name: contest.regions[i]};
         }
         this.bracket = new Bracket(null, teams, 1, this.the64);
-        this.regions[0].bracket = this.bracket.a.a;
-        this.regions[1].bracket = this.bracket.a.b;
-        this.regions[2].bracket = this.bracket.b.a;
-        this.regions[3].bracket = this.bracket.b.b;
+        contest.regions[0].bracket = this.bracket.a.a;
+        contest.regions[1].bracket = this.bracket.a.b;
+        contest.regions[2].bracket = this.bracket.b.a;
+        contest.regions[3].bracket = this.bracket.b.b;
         this.teamsReady = true;
 
 

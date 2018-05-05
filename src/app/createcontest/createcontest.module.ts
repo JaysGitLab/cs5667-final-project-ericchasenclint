@@ -5,15 +5,18 @@ import { RouterModule } from '@angular/router';
 
 import { CreateContestRoutes } from './createcontest.routes';
 import { CreateContestComponent} from './createcontest.component';
-import { TeamDropdownComponent } from './team-dropdown/team-dropdown.component';
+
+import { SortablejsModule } from 'angular-sortablejs';
 
 import {
   MatAutocompleteModule,
   MatButtonModule,
+  MatCardModule,
   MatInputModule,
   MatMenuModule,
   MatRadioModule,
   MatRippleModule,
+  MatSelectModule,
   MatSortModule,
   MatDatepickerModule,
   MatNativeDateModule,
@@ -26,18 +29,20 @@ import {
         ReactiveFormsModule,
         MatAutocompleteModule,
         MatButtonModule,
+        MatCardModule,
         MatInputModule,
         MatMenuModule,
         MatRadioModule,
         MatRippleModule,
+        MatSelectModule,
         MatSortModule,
         MatDatepickerModule,
         MatNativeDateModule,
         RouterModule.forChild(CreateContestRoutes),
+        SortablejsModule.forRoot({ animation: 150 }),
     ],
     declarations: [
         CreateContestComponent,
-        TeamDropdownComponent,
     ]
 })
 
