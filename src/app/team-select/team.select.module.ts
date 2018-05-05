@@ -10,22 +10,30 @@ import { ContestSelectComponent } from "../contestselect/contestselect.component
 import {
     MatButtonModule,
     MatRippleModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatListModule,
+    MatGridListModule,
+    MatExpansionModule
 } from '@angular/material'
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(TeamSelectRoutes),
         MatButtonModule,
         MatRippleModule,
         MatInputModule,
-        FormsModule
+        MatToolbarModule,
+        MatCardModule,
+        MatListModule,
+        MatGridListModule,
+        MatExpansionModule,
+        FormsModule,
+        RouterModule.forChild(TeamSelectRoutes)
     ],
-    declarations: [
-        TeamComponent,
-        ContestSelectComponent
-    ]
+    exports: [TeamComponent], //Unsure if this is needed?
+    declarations: [TeamComponent, ContestSelectComponent]
 })
 
 export class TeamSelectModule { }

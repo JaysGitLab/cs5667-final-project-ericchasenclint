@@ -1,10 +1,77 @@
-<div *ngIf="user">
-    <h1>Hello {{user.fullName}}</h1>
-     <button (click)="signout()">Signout</button>
-     <a [routerLink]="['/authentication/signup']">Signup</a>
-     <a [routerLink]="['/createcontest']">Create Contest</a>
-</div>
-<div *ngIf="!user">
-    <a [routerLink]="['/authentication/signin']">Signin</a>
+<div class="rules-contianer">
+  <section class="hero">
+    <h1 class="hero-title">McRae's Bracket Challenge</h1>
+    <h4 class="hero-subtitle">March Madness with a twist.
+      <br/> Pick your favorite teams and compete.</h4>
+    <a routerLink="/entercontest" class="primary-cta">Create An Entry</a>
+    <div class="split-pictures">
+      <div class="hero-picture picture-one"></div>
+      <div class="hero-picture picture-two"></div>
+    </div>
+  </section>
+
+  <section class="standard-section explanation-section">
+    <h2 class="section-title">How Does It Work?</h2>
+    <button class="section-title" (click)="signout()">Signout - FIX ME</button>
+    <div class="standard-panel explanation-left">
+      <h4 class="panel-title">What Is Happening?</h4>
+      <p class="panel-copy">If you are unfamiliar with how March Madness works, watch the video below.</p>
+      <iframe width="420" height="315" src="https://www.youtube.com/embed/qQJNMlvSLek">
+      </iframe>
+      <p class="panel-copy rules-cta">Now that you know what is happening, read the rules to the right so that you understand how McRae's Bracket Challenge
+        works.
+      </p>
+    </div>
+    <div class="standard-panel explanation-right">
+      <h4 class="panel-title">The Process</h4>
+      <img class="number-image" src="../../assets/img/generic/number/1.png">
+      <p class="rules-copy">Select one team from each seed. Enter a score for the championship game for tiebraker purposes. Submit your selections!</p>
+      <img class="number-image" src="../../assets/img/generic/number/2.png">
+      <p class="rules-copy">If your team wins, you receive points! For each subsequent round your team wins, you receive even more points.
+        <br>
+        <br>
+        <b>Scoring:</b>
+        <br>
+        <br> Round 1 - 10 points
+        <br> Round 2 - 20 points
+        <br> Sweet Sixteen - 30 points
+        <br> Elite Eight - 40 points
+        <br> Final Four - 50 points
+        <br> Championship - 60 points
+        <br>
+        <br>
+        <b>Bonus Points:</b>
+        <br>
+        <br> You win bonus points if one of your teams beats a lower numbered seed before the Final Four. For example, if your
+        seed 10 team beats a seed 7 team, you will earn 3 bonus points.
+      </p>
+      <img class="number-image" src="../../assets/img/generic/number/3.png">
+      <p class="rules-copy">Sit back, relax, and let the madness infiltrate you. March Madness is a time where logic has no place and Cindarella
+        Stories constantly make headlines.
+        <br>
+        <br>
+        <b>"Sixteen seeds never win!"</b>
+        <br>
+        <br> UMBC would like a word with you.
+        <br>
+        <br>
+        <b>"Only the top seeds ever win!"</b>
+        <br>
+        <br> The 1985, eighth-seeded Villanova Wildcats would like a word with you.
+    </div>
+  </section>
+  <section class="standard-section blue-section get-started-section">
+    <div class="standard-panel get-started-panel">
+      <img class="get-started-cutout divin" src="../../assets/img/generic/divin.png" alt="Sister Jean Cutout">
+      <h2 class="section-title">Let's Get Started!</h2>
+      <p class="entry-copy">Now that you're all caught up on the rules, create an entry and get your head in the game!</p>
+      <a routerLink="/entercontest" class="primary-cta">Create An Entry</a>
+      <img class="get-started-cutout sister-jean" src="../../assets/img/generic/sister-jean.png" alt="Sister Jean Cutout">
+    </div>
+    <p class="questions-copy">If you have any questions, please contact
+      <a class="questions-link" href="mailto:alice.mcrae@gmail.com">alice.mcrae@gmail.com</a>
+    </p>
+  </section>
+
 </div>
 

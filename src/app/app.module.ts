@@ -34,10 +34,9 @@ import { ENV_PROVIDERS } from "./environment";
 import { ROUTES } from "./app.routes";
 
 // Components
-
 import { HomeComponent } from "./home";
 import { NavBarComponent } from "./navbar";
-import { ReactComponent } from "./react";
+import { TeamComponent } from "./team-select/team";
 
 // App is our top level component
 import { AppComponent } from "./app.component";
@@ -81,7 +80,6 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    ReactComponent,
     NoContentComponent
   ],
   /**
@@ -94,6 +92,7 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     HomeModule,
+    TeamSelectModule,
     NavBarModule,
     AuthenticationModule,
     CreateContestModule,

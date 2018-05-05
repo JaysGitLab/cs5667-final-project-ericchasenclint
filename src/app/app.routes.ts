@@ -1,13 +1,13 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./home";
-import { ReactComponent } from "./react";
+import { TeamComponent } from "./team-select/team.component"
 import { NoContentComponent } from "./no-content";
 
 import { DataResolver } from "./app.resolver";
 
 export const ROUTES: Routes = [
   { path: "", component: HomeComponent },
-  { path: "react", component: ReactComponent },
+  { path: "select", component: TeamComponent },
   { path: "**", component: NoContentComponent }
 ];
 
