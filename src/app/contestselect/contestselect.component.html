@@ -1,12 +1,13 @@
 <div class="contestselect-container">
-<h1>{{message}}</h1>
-<div *ngIf="currentContests.length!=0">
-<button *ngFor="let contest of currentContests"
-        class="contestbutton"
-        (click)="selectcontest(contest)"
-        mat-raised-button>{{contest.year}} {{contest.gender}}'s</button>
+    <h1>{{message}}</h1>
+    <div *ngIf="currentContests.length!=0">
+    <button *ngFor="let contest of currentContests"
+            class="contestbutton"
+            (click)="selectcontest(contest)"
+            mat-raised-button>{{contest.year}} {{contest.gender}}'s</button>
+    </div>
+    <div *ngIf="currentContests.length==0">
+    There are currently no contests active.
+    </div>
 </div>
-<div *ngIf="currentContests.length==0">
-There are currently no contests active.
-</div>
-</div>
+

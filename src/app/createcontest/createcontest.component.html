@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="user">
     <router-outlet></router-outlet>
     <form class="createcontestform" [formGroup]='contestform'>
 		<div>
@@ -57,4 +57,7 @@
         <p *ngIf="showInvalidWarning">You need to complete the form before submitting</p>
         <button mat-raised-button (click)="onSubmit()">Submit</button>
     </form>
+</div>
+<div *ngIf="!user">
+Nothing to see here..
 </div>
