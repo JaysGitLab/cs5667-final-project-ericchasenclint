@@ -5,6 +5,8 @@ import { Bracket, Team } from './bracket';
 
 import { ContestService } from '../createcontest/createcontest.service';
 
+import { LocalStorage } from 'ngx-store';
+
 @Component({
     selector: 'updatebracket',
     templateUrl: './updatebracket.component.html',
@@ -20,7 +22,8 @@ export class UpdateBracketComponent implements OnInit{
     year: number;
     gender: string;
     errorMessage: string;
-
+    @LocalStorage('user') user: any;  
+    
     constructor(
         private _router: Router,
         private _contestService: ContestService,

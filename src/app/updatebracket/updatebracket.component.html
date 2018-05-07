@@ -1,4 +1,4 @@
-<div *ngIf="teamsReady" class="updatebracket-container">
+<div *ngIf="teamsReady && user" class="updatebracket-container">
     <h1>Final Four</h1>
     <app-bracket [showName]='true' [bracket]="bracket" [displayUntil]=4 [top]="true"></app-bracket>
     <div *ngFor="let region of regions">
@@ -6,4 +6,7 @@
         <app-bracket [showName]='false' [bracket]="region.bracket" [displayUntil]=64 [top]="true"></app-bracket>
     </div>
     <button mat-raised-button (click)="onSubmit()">Submit</button>
+</div>
+<div *ngIf="!user">
+Invalid Page...
 </div>

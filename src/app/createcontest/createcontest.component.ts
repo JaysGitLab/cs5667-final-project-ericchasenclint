@@ -8,6 +8,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
+import { LocalStorage } from 'ngx-store';
+
 @Component({
     selector: 'createcontest',
     templateUrl: './createcontest.component.html',
@@ -30,6 +32,8 @@ export class CreateContestComponent implements OnInit{
     contestform: FormGroup;
     filteredTeams: Observable<any[]>;
 
+    @LocalStorage('user') user: any;
+    
     constructor (private fb: FormBuilder, private _router: Router,
         private _contestService: ContestService) {
     }
