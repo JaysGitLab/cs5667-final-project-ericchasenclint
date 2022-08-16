@@ -5346,8 +5346,8 @@ mongodb@^2.0.36:
     mongodb-core "2.1.19"
     readable-stream "2.2.7"
 
-mongoose@^4.10.6:
-  version "4.13.12"
+mongoose@^6.4.6:
+  version ">=6.4.6"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.13.12.tgz#8eb2bb9c820391cc524540950a8eb5f0992f1e8b"
   dependencies:
     async "2.1.4"
